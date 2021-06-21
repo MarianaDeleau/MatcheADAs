@@ -1,3 +1,14 @@
+const arrayTest=[];
+const grid=document.getElementById('grid')
+// const TAMAÑO_MATRIZ=9
+// const TAMAÑO_ITEM=56
+
+let emoji=['🐷', '🐶', '🐸', '🐮', '🐭', '🐱', ]
+
+let matrizSize;
+let itemSize; 
+
+//DEVUELVE EMOJI SUELTO
 
 // ###### Función que genera la grilla
 const generateGrid =(matrizSize, itemSize)=> {
