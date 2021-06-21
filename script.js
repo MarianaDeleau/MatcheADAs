@@ -10,6 +10,14 @@ let itemSize;
 
 //DEVUELVE EMOJI SUELTO
 
+const randomItems =() => {
+
+
+    let emojiRandom=emoji[Math.floor(Math.random()*emoji.length)]
+
+    return emojiRandom
+    //console.log(emojiRandom)
+}
 // ###### Función que genera la grilla
 const generateGrid =(matrizSize, itemSize)=> {
     
@@ -31,6 +39,8 @@ const generateGrid =(matrizSize, itemSize)=> {
             
             celda.style.textAlign= 'center'
             celda.style.fontSize='30px';
+
+            celda.innerText=randomItems()
 
             celda.setAttribute('data-x', column);
             celda.setAttribute('data-y', row);
