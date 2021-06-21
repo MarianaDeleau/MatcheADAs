@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MatcheADAs</title>
+    <link rel="stylesheet" href="./style.css">
+
+    <script src="https://kit.fontawesome.com/5b0f89b18e.js" crossorigin="anonymous"></script> <!--fontawesome-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--sweetalert-->
+    <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script><!--twemoji-->
+
+
+</head>
+<body>
+    
+    <div id="container" class="container">
+
+        <h1 id="title" class="title">MatcheAdas</h1>
+
+        <div id="control" class="control">
+
+            <div class="points">
+                <p>Combos x<span>1</span></p>
+                <p>Puntos: <span>0</span></p>
+            </div>
+            <div class="points">
+                <button>
+                    <i class="fas fa-info-circle"></i>
+                </button>
+                <button>
+                    <i class="fas fa-undo-alt"></i>
+                </button>
+            </div>
+
+        </div>
+
+        <div id="grid" class="grid" data-type=""></div>
+
+        <div id="time" class="time">
+            <i class="fas fa-hourglass-half"></i>
+            <p>30</p>
+        </div>
+
+    </div>
+    
+    <div id="overlay" style="display: none;">
+
+        <div id="modal-welcome"></div>
+        <div id="modal-new-game"></div>
+        <div id="modal-end-game"></div>
+        <div id="modal-restart"></div>
+
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
