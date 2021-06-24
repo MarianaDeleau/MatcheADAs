@@ -59,6 +59,16 @@ button{
     background-color:rgb(255 255 255 / 40%);
     border: 4px #f87372 solid;
     position: relative;
+    cursor: pointer;
+}
+
+.cell{
+  border:1px solid transparent;
+  border-radius: 10px;
+}
+.cell:active{
+  border:2px solid  #f87372;
+  border-radius: 10px;
 }
 
 .control{
