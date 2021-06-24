@@ -18,6 +18,53 @@ const randomItems =() => {
     return emojiRandom
     //console.log(emojiRandom)
 }
+
+//INTERCAMBIA ANIMALITOS
+
+let selectedElement = null;
+let clickedElement = null;
+let auxItem;
+
+const clickItem = (e) => {
+  
+    if (selectedElement == null) {
+    // Si no hay elemento seleccionado, almaceno el target del evento como elemento seleccionado.
+        selectedElement = e.target;
+
+    // console.log(`Elemento seleccionado ${elemento_seleccionado.innerText}`);
+    // console.log(`Posicion elemento seleccionado ${elemento_seleccionado.dataset.y}, ${elemento_seleccionado.dataset.x}`) 
+
+    } else if (selectedElement != null) {
+
+    // Si ya tengo un elemento seleccionado
+    // Guardo el elemento clickeado
+
+    // Falta chequear si el segundo elemento es adyacente horizontal o verticalmente al elemento seleccionado
+    // <<<((( if (la coordenada del elemento seleccionado es + o - 1 que la del elemento clickeado) {
+        // sigo con el flujo del juego    
+    //} else if {
+        //cambio de elemento seleccionado
+    //} )))))))>>>>>
+
+        clickedElement = e.target;
+
+        //Almaceno en variable auxiliar el elemento clickeado
+        auxItem=clickedElement.innerText;
+
+        // Seteo como animalito del elemento clickeado el del elemento seleccionado la primera vez
+        e.target.innerText = selectedElement.innerText;
+
+        // Setteo como el animalito del elemento seleccionado la primera vez como el del elemento clickeado la segunda vez
+        selectedElement.innerText = auxItem;
+
+        // Reseteo todas las variables
+        selectedElement = null;
+        clickedElement = null;
+        auxItem=null
+
+    }
+};
+
 // ###### Función que genera la grilla
 const generateGrid =(matrizSize, itemSize)=> {
     
@@ -45,6 +92,8 @@ const generateGrid =(matrizSize, itemSize)=> {
             celda.setAttribute('data-x', column);
             celda.setAttribute('data-y', row);
         
+            celda.addEventListener("click", clickItem); 
+
             grid.appendChild(celda);
     }
 }
