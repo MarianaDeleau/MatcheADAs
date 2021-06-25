@@ -39,6 +39,17 @@ button{
     border-style: none;
 }
 
+.cell{
+  border:1px solid transparent;
+  border-radius: 10px;
+}
+.cell:active{
+  border:2px solid  #f87372;
+  border-radius: 10px;
+}
+
+
+
 
 .container{
     width: 600px;
