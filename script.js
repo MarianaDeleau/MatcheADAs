@@ -87,6 +87,7 @@ const generateGrid =(matrizSize, itemSize)=> {
             celda.style.left = `${column*itemSize}px`;
             celda.style.top = `${row*itemSize}px`;
             //celda.style.border = '1px solid #000';
+            celda.classList.add('cell')
         
             //para ver coordenadas
             celda.innerText=`${column} ${row}`
@@ -104,7 +105,6 @@ const generateGrid =(matrizSize, itemSize)=> {
             grid.appendChild(celda);
     }
 }
-
 }
 
 //GENERA EL TAMAÑO DE LA GRILLA
@@ -141,4 +141,5 @@ const gridGenerator = () =>{
     }
     
     gridGenerator()
+
 
