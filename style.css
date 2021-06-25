@@ -25,7 +25,7 @@ background-image: url(https://img.freepik.com/vector-gratis/paisaje-granja-disen
 background-repeat: no-repeat;
 background-size: cover;
 color: #000;
-
+cursor: pointer;
 }
 
 h1{
@@ -48,13 +48,14 @@ button{
 .cell{
   border:1px solid transparent;
   border-radius: 10px;
+
 }
+
 .cell:active{
   border:2px solid  #f87372;
   border-radius: 10px;
+  transition-duration: 0.1s;
 }
-
-
 
 
 .container{

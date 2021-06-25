@@ -93,6 +93,7 @@ const generateGrid =(matrizSize, itemSize)=> {
             celda.innerText=`${column} ${row}`
             
             celda.style.textAlign= 'center'
+            celda.style.verticalAlign='center'
             celda.style.fontSize='30px';
 
             celda.innerText=randomItems()
