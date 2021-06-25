@@ -119,7 +119,7 @@ const gridGenerator = () =>{
     
         switch(difficulty){
     
-            case '1':
+           case '1':
                 matrizSize=9
                 itemSize=56
                 generateGrid(matrizSize, itemSize); 
@@ -141,6 +141,17 @@ const gridGenerator = () =>{
         
     }
     
-    gridGenerator()
+    gridGenerator();
 
-
+    // ######### TIMER 
+    //está en window por ahora. Cuando tengamos el sweet alert tenemos que cambiar y poner un evento de click en el boton de empezar.  Lo mismo con el if en duration <= 0, que debe saltar la ventana y no reiniciar 
+    let duration = 30;
+    let timer = document.getElementById("timer");
+    window.setInterval(function(){ 
+    timer.innerHTML = duration;
+    duration--; //aqui es solo para descir que debe decrementar. si ponemos ++ seria un contador de tiempo. 
+    duration = duration < 10 ? "0" + duration : duration; // eso es solo estético, para que quede con dos algarismo cuando los numeros sean menores que 10.
+    if (duration <= 0){
+        window.location.reload();
+    }
+    },1000); // esos 1000 son equivalentes a un segundo, ellos es que dicen que a cada segundo debe cambiar lo que vemos en pantalla.
