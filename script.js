@@ -23,7 +23,7 @@ const randomItems =() => {
 
 let selectedElement = null;
 let clickedElement = null;
-let auxItem;
+
 
 const clickItem = (e) => {
   
@@ -49,18 +49,25 @@ const clickItem = (e) => {
         clickedElement = e.target;
 
         //Almaceno en variable auxiliar el elemento clickeado
-        auxItem=clickedElement.innerText;
+        //auxItem=clickedElement.innerText;
+        const auxTop= clickedElement.style.top;
+        const auxLeft=clickedElement.style.left;
 
         // Seteo como animalito del elemento clickeado el del elemento seleccionado la primera vez
-        e.target.innerText = selectedElement.innerText;
+        
+        clickedElement.style.top=selectedElement.style.top;
+        clickedElement.style.left=selectedElement.style.left;
+
 
         // Setteo como el animalito del elemento seleccionado la primera vez como el del elemento clickeado la segunda vez
-        selectedElement.innerText = auxItem;
 
+        selectedElement.style.top=auxTop;
+        selectedElement.style.left=auxLeft;
+        
         // Reseteo todas las variables
         selectedElement = null;
         clickedElement = null;
-        auxItem=null
+       
 
     }
 };
