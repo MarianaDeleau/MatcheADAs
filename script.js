@@ -19,6 +19,7 @@ const randomItems =() => {
     //console.log(emojiRandom)
 }
 
+
 //INTERCAMBIA ANIMALITOS
 
 let selectedElement = null;
@@ -31,35 +32,32 @@ const clickItem = (e) => {
     // Si no hay elemento seleccionado, almaceno el target del evento como elemento seleccionado.
         selectedElement = e.target;
 
-    // console.log(`Elemento seleccionado ${elemento_seleccionado.innerText}`);
-    // console.log(`Posicion elemento seleccionado ${elemento_seleccionado.dataset.y}, ${elemento_seleccionado.dataset.x}`) 
+    // console.log(`Elemento seleccionado ${selectedElement.innerText}`);
+    // console.log(`Posicion elemento seleccionado ${selectedElement.dataset.y}, ${selectedElement.dataset.x}`) 
 
     } else if (selectedElement != null) {
 
     // Si ya tengo un elemento seleccionado
     // Guardo el elemento clickeado
 
-    // Falta chequear si el segundo elemento es adyacente horizontal o verticalmente al elemento seleccionado
-    // <<<((( if (la coordenada del elemento seleccionado es + o - 1 que la del elemento clickeado) {
-        // sigo con el flujo del juego    
-    //} else if {
-        //cambio de elemento seleccionado
-    //} )))))))>>>>>
-
+  
         clickedElement = e.target;
-
         //Almaceno en variable auxiliar el elemento clickeado
-        //auxItem=clickedElement.innerText;
+
+
+        isAdjacentItem(selectedElement, clickedElement)
+        //LUEGO SETEAR ESTILOS CON IF Y SEPARAR FUNCIONES
+               
         const auxTop= clickedElement.style.top;
         const auxLeft=clickedElement.style.left;
 
         // Seteo como animalito del elemento clickeado el del elemento seleccionado la primera vez
-        
+            
         clickedElement.style.top=selectedElement.style.top;
         clickedElement.style.left=selectedElement.style.left;
 
 
-        // Setteo como el animalito del elemento seleccionado la primera vez como el del elemento clickeado la segunda vez
+        // // Setteo como el animalito del elemento seleccionado la primera vez como el del elemento clickeado la segunda vez
 
         selectedElement.style.top=auxTop;
         selectedElement.style.left=auxLeft;
@@ -125,7 +123,7 @@ const gridGenerator = () =>{
                 generateGrid(matrizSize, itemSize); 
                 break;
             
-     case '2':
+             case '2':
                 matrizSize=8
                 itemSize=63
                 generateGrid(matrizSize, itemSize); 
@@ -143,15 +141,41 @@ const gridGenerator = () =>{
     
     gridGenerator();
 
-    // ######### TIMER 
-    //está en window por ahora. Cuando tengamos el sweet alert tenemos que cambiar y poner un evento de click en el boton de empezar.  Lo mismo con el if en duration <= 0, que debe saltar la ventana y no reiniciar 
-    let duration = 30;
-    let timer = document.getElementById("timer");
-    window.setInterval(function(){ 
-    timer.innerHTML = duration;
-    duration--; //aqui es solo para descir que debe decrementar. si ponemos ++ seria un contador de tiempo. 
-    duration = duration < 10 ? "0" + duration : duration; // eso es solo estético, para que quede con dos algarismo cuando los numeros sean menores que 10.
-    if (duration <= 0){
-        window.location.reload();
+    // // ######### TIMER 
+    // //está en window por ahora. Cuando tengamos el sweet alert tenemos que cambiar y poner un evento de click en el boton de empezar.  Lo mismo con el if en duration <= 0, que debe saltar la ventana y no reiniciar 
+    // let duration = 30;
+    // let timer = document.getElementById("timer");
+    // window.setInterval(function(){ 
+    // timer.innerHTML = duration;
+    // duration--; //aqui es solo para descir que debe decrementar. si ponemos ++ seria un contador de tiempo. 
+    // duration = duration < 10 ? "0" + duration : duration; // eso es solo estético, para que quede con dos algarismo cuando los numeros sean menores que 10.
+    // if (duration <= 0){
+    //     window.location.reload();
+    // }
+    // },1000); // esos 1000 son equivalentes a un segundo, ellos es que dicen que a cada segundo debe cambiar lo que vemos en pantalla.
+
+    // let selectedItem = null;
+
+    const isAdjacentItem = (a, b) => {
+
+        const aX= Number(a.dataset.x);
+        const aY= Number(a.dataset.y);
+        const bX= Number(b.dataset.x);
+        const bY= Number(b.dataset.y);
+
+
+        if(aX === bX){
+        
+           return (aY === bY -1) || (aY === bY +1);
+                       
+        } else if (aY === bY){
+           
+            return (aX === bX -1) || (aX === bX +1);
+
+        } 
+        
+        return false;
+
     }
-    },1000); // esos 1000 son equivalentes a un segundo, ellos es que dicen que a cada segundo debe cambiar lo que vemos en pantalla.
+
+
