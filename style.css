@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 /*font-family: 'Pacifico', cursive;*/
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 *{
 margin: 0;
@@ -114,4 +116,18 @@ flex-direction: row;
 align-items: center;
 margin: 20px 0;
 filter: drop-shadow(2px 2px 2px #3b3636) ;
+}
+
+.modal{
+    font-family: 'Poppins';
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+}
+
+.btn-play{
+    width: 100px;
+    height:40px;
+    border: 2px solid #f87372;
+    font-family: 'Poppins';
 }
