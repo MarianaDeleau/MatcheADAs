@@ -7,6 +7,22 @@ let emoji=['🐷', '🐶', '🐸', '🐮', '🐭', '🐱', ]
 let matrizSize;
 let itemSize;
 
+// leer matriz
+const leerMatriz = () => {  
+  let matriz;
+  matriz = new Array(matrizSize);
+  for(let i = 0; i < matrizSize; i++) {
+    matriz[i] = new Array(matrizSize)
+  };
+  for(let i = 0; i < matrizSize; i++) {
+    for(let j = 0; j < matrizSize; j++) {
+      matriz[i][j] = document.querySelector(`[data-x="${j}"][data-y="${i}"]`).innerText;
+    }
+  }
+  console.log("+++matriz+++", matriz)
+  return matriz;
+}
+
 //DEVUELVE EMOJI SUELTO
 
 const randomItems =() => {
@@ -132,12 +148,12 @@ const gridGenerator = () =>{
     let duration = 30;
     let timer = document.getElementById("timer");
     window.setInterval(function(){
-    timer.innerHTML = duration;
-    duration--; //aqui es solo para descir que debe decrementar. si ponemos ++ seria un contador de tiempo.
-    duration = duration < 10 ? "0" + duration : duration; // eso es solo estético, para que quede con dos algarismo cuando los numeros sean menores que 10.
-    if (duration <= 0){
+      timer.innerHTML = duration;
+      duration--; //aqui es solo para descir que debe decrementar. si ponemos ++ seria un contador de tiempo.
+      duration = duration < 10 ? "0" + duration : duration; // eso es solo estético, para que quede con dos algarismo cuando los numeros sean menores que 10.
+      if (duration <= 0){
         window.location.reload();
-    }
+      }
     },1000); // esos 1000 son equivalentes a un segundo, ellos es que dicen que a cada segundo debe cambiar lo que vemos en pantalla.
 
     let selectedItem = null;
@@ -188,6 +204,33 @@ const switchCell = (a,b) =>{
     b.setAttribute('data-x', aux1DataX)
     a.setAttribute('data-y', aux2DataY)
     b.setAttribute('data-y', aux1DataY)
-
-    
+   
+    tieneBloqueVertical(leerMatriz());
 }
+
+// hay bloques verticales
+
+const tieneBloqueVertical = (matriz)=> {
+  let respuesta = false
+
+  for(let j= 0; j < matrizSize; j++) {
+    for(let i= 0; i < matrizSize; i++) {
+      if(i < matrizSize - 2 && matriz[i][j] === matriz[i+1][j] 
+        && matriz[i][j] === matriz[i+2][j]) {
+        const dato = matriz[i][j];
+        for( let w = i; w < matrizSize; w++) {
+          if(matriz[w][j] === dato) {
+            matriz[w][j] = 0;
+          } else {
+            break;
+          }
+        }
+        respuesta = true
+        console.log('respuesta: ', respuesta)
+      }
+    }
+  }
+  console.log('respuesta: ', respuesta)
+}
+
+
