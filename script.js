@@ -8,7 +8,7 @@ let matrizSize;
 let itemSize;
 
 // leer matriz
-const leerMatriz = () => {  
+const matrizFinder = () => {  
   let matriz;
   matriz = new Array(matrizSize);
   for(let i = 0; i < matrizSize; i++) {
@@ -205,32 +205,9 @@ const switchCell = (a,b) =>{
     a.setAttribute('data-y', aux2DataY)
     b.setAttribute('data-y', aux1DataY)
    
-    tieneBloqueVertical(leerMatriz());
+    matrizFinder()
 }
 
-// hay bloques verticales
 
-const tieneBloqueVertical = (matriz)=> {
-  let respuesta = false
-
-  for(let j= 0; j < matrizSize; j++) {
-    for(let i= 0; i < matrizSize; i++) {
-      if(i < matrizSize - 2 && matriz[i][j] === matriz[i+1][j] 
-        && matriz[i][j] === matriz[i+2][j]) {
-        const dato = matriz[i][j];
-        for( let w = i; w < matrizSize; w++) {
-          if(matriz[w][j] === dato) {
-            matriz[w][j] = 0;
-          } else {
-            break;
-          }
-        }
-        respuesta = true
-        console.log('respuesta: ', respuesta)
-      }
-    }
-  }
-  console.log('respuesta: ', respuesta)
-}
 
 
