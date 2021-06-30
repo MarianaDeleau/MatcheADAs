@@ -205,7 +205,9 @@ const switchCell = (a,b) =>{
     a.setAttribute('data-y', aux2DataY)
     b.setAttribute('data-y', aux1DataY)
    
-    searchHorizontalMatch(matrizFinder());
+    
+    searchMatches();
+
 }
 
 
@@ -287,3 +289,9 @@ const searchVerticalMatch = (matriz) => {
   
   }
   
+  const searchMatches = () => {
+
+    searchVerticalMatch(matrizFinder());
+    searchHorizontalMatch(matrizFinder())
+  
+  }
