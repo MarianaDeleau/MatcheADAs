@@ -110,51 +110,51 @@ const generateGrid =(matrizSize, itemSize)=> {
 
 //GENERA EL TAMAÑO DE LA GRILLA
 
-const gridGenerator = () =>{
+// const gridGenerator = () =>{
 
-    //++++++COMENTÉ EL CODIGO PARA EVITAR EL PROMPT++++++//
+//     //++++++COMENTÉ EL CODIGO PARA EVITAR EL PROMPT++++++//
 
-        const difficulty= prompt('Select 1 for easy, 2 for medium or 3 for difficult');
-        grid.setAttribute('data-type', difficulty);
+//         const difficulty= prompt('Select 1 for easy, 2 for medium or 3 for difficult');
+//         grid.setAttribute('data-type', difficulty);
 
-        switch(difficulty){
+//         switch(difficulty){
 
-            case '1':
+//             case '1':
                 matrizSize=9
                 itemSize=56
                 generateGrid(matrizSize, itemSize);
-                break;
+    //             break;
 
-            case '2':
-                matrizSize=8
-                itemSize=63
-                generateGrid(matrizSize, itemSize);
-                break;
+    //         case '2':
+    //             matrizSize=8
+    //             itemSize=63
+    //             generateGrid(matrizSize, itemSize);
+    //             break;
 
-            case '3':
-                matrizSize=7
-                itemSize=72
-                generateGrid(matrizSize, itemSize);
-                break;
+    //         case '3':
+    //             matrizSize=7
+    //             itemSize=72
+    //             generateGrid(matrizSize, itemSize);
+    //             break;
 
-        }
+    //     }
 
-    }
+    // }
 
-    gridGenerator();
+    // gridGenerator();
 
-    // ######### TIMER
-    //está en window por ahora. Cuando tengamos el sweet alert tenemos que cambiar y poner un evento de click en el boton de empezar.  Lo mismo con el if en duration <= 0, que debe saltar la ventana y no reiniciar
-    let duration = 30;
-    let timer = document.getElementById("timer");
-    window.setInterval(function(){
-      timer.innerHTML = duration;
-      duration--; //aqui es solo para descir que debe decrementar. si ponemos ++ seria un contador de tiempo.
-      duration = duration < 10 ? "0" + duration : duration; // eso es solo estético, para que quede con dos algarismo cuando los numeros sean menores que 10.
-      if (duration <= 0){
-        window.location.reload();
-      }
-    },1000); // esos 1000 son equivalentes a un segundo, ellos es que dicen que a cada segundo debe cambiar lo que vemos en pantalla.
+    // // ######### TIMER
+    // //está en window por ahora. Cuando tengamos el sweet alert tenemos que cambiar y poner un evento de click en el boton de empezar.  Lo mismo con el if en duration <= 0, que debe saltar la ventana y no reiniciar
+    // let duration = 30;
+    // let timer = document.getElementById("timer");
+    // window.setInterval(function(){
+    //   timer.innerHTML = duration;
+    //   duration--; //aqui es solo para descir que debe decrementar. si ponemos ++ seria un contador de tiempo.
+    //   duration = duration < 10 ? "0" + duration : duration; // eso es solo estético, para que quede con dos algarismo cuando los numeros sean menores que 10.
+    //   if (duration <= 0){
+    //     window.location.reload();
+    //   }
+    // },1000); // esos 1000 son equivalentes a un segundo, ellos es que dicen que a cada segundo debe cambiar lo que vemos en pantalla.
 
     let selectedItem = null;
 
@@ -205,9 +205,44 @@ const switchCell = (a,b) =>{
     a.setAttribute('data-y', aux2DataY)
     b.setAttribute('data-y', aux1DataY)
    
-    matrizFinder()
+    searchHorizontalMatch(matrizFinder());
 }
 
 
+const searchHorizontalMatch = (matriz) => {
 
+    for(let i = 0; i < matriz.length; i++) {
+  
+        const array = matriz[i]; 
+        let previous; 
+        let founded=0;
+        let times=3 
+        
+    for(let j = 0; j < array.length; j++) {
+               
+        if(array[j] === previous) {
+
+          founded++
+
+          } else {
+            founded=1
+          }
+
+          if(founded>=times){
+                   
+              //return true;
+              console.log(true)
+              
+          } else {
+
+            console.log(false)
+          }
+          
+          previous=array[j]
+
+    }
+        
+}
+
+}
 
