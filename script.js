@@ -209,5 +209,44 @@ const switchCell = (a,b) =>{
 }
 
 
+const searchVerticalMatch = (matriz) => {
+
+    const itemsPorArray = matriz[0].length; 
+  
+        for(let j = 0; j < itemsPorArray; j++) {      
+  
+                let previous; 
+                let founded=0;
+                const times=3
+    
+            for(let i = 0; i < matriz.length; i++){
+  
+                    if(previous===matriz[i][j]) {
+          
+                    founded++
+          
+                    } else {
+                        founded=1
+                    }
+          
+          
+                    if(founded>=times){
+                    
+                        //return true;
+                        console.log(true)
+                        
+                    } else {
+                        
+                        console.log(false)
+  
+                    }
+                      
+                    previous=matriz[i][j]
+          }
+          
+      }
+  
+  }
+  
 
 
