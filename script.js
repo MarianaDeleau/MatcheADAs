@@ -108,40 +108,6 @@ const generateGrid =(matrizSize, itemSize)=> {
 }
 }
 
-//GENERA EL TAMAÑO DE LA GRILLA
-
-// const gridGenerator = () =>{
-
-//     //++++++COMENTÉ EL CODIGO PARA EVITAR EL PROMPT++++++//
-
-//         const difficulty= prompt('Select 1 for easy, 2 for medium or 3 for difficult');
-//         grid.setAttribute('data-type', difficulty);
-
-//         switch(difficulty){
-
-//             case '1':
-                matrizSize=9
-                itemSize=56
-                generateGrid(matrizSize, itemSize);
-    //             break;
-
-    //         case '2':
-    //             matrizSize=8
-    //             itemSize=63
-    //             generateGrid(matrizSize, itemSize);
-    //             break;
-
-    //         case '3':
-    //             matrizSize=7
-    //             itemSize=72
-    //             generateGrid(matrizSize, itemSize);
-    //             break;
-
-    //     }
-
-    // }
-
-    // gridGenerator();
 
     // // ######### TIMER
     // //está en window por ahora. Cuando tengamos el sweet alert tenemos que cambiar y poner un evento de click en el boton de empezar.  Lo mismo con el if en duration <= 0, que debe saltar la ventana y no reiniciar
@@ -287,3 +253,73 @@ const searchVerticalMatch = (matriz) => {
   
   }
   
+//######### ELEGIR DIFICULTAD DE JUEGO ········
+
+const selectLevel = () => {
+    swal({
+        title: 'Nuevo Juego',
+        buttons: {
+            facil: {
+                text: 'Fácil',
+                value: 'facil',
+                className: 'btn-play',
+            },
+            medio: {
+                text: 'Medio',
+                value: 'medio',
+                className: 'btn-play',
+            },
+            dificil: {
+                text: 'Difícil',
+                value: 'dificil',
+                className: 'btn-play',
+            },
+        },
+    }).then((value) => {
+    switch(value) {
+
+        case 'facil':
+            matrizSize=9
+            itemSize=56
+            generateGrid(matrizSize, itemSize);
+            break;
+            
+        case 'medio':
+            matrizSize=8
+            itemSize=63
+            generateGrid(matrizSize, itemSize);
+            break;
+            
+        case 'dificil':
+            matrizSize=7
+            itemSize=72
+            generateGrid(matrizSize, itemSize);
+            break;
+
+        default:
+            swal({icon:'error'});
+            selectLevel();
+        }
+            
+    });
+            
+};
+//######### MENSAJE DE INICIO ········
+
+    Swal.fire({
+        title: '¡Bienvenida!',
+        html: '<p class="modal">En MatcheADAs tu objetivo es juntar tres o más ítems del mismo tipo,ya sea en fila o columna. Para eso, selecciona un ítem y a continuación un ítem adyacente para intercambiarlos de lugar.<br>Si se forma un grupo, esos ítems se eliminarán y ganarás puntos.¡Sigue armando grupos de 3 o más antes de que se acabe el tiempo!</p><br><span class="modal">CONTROLES</span><p class="modal">Click izquierdo: selección</p><p class="modal">Enter o Espacio: selección</p><p class="modal">Flechas o WASD: movimiento e intercambio</p>',
+        confirmButtonText: 'JUGAR',
+        padding:'1rem',
+        backdrop:true,
+        customClass: {
+            confirmButton: 'btn-play'
+        },
+        showConfirmButton: true,
+        confirmButtonColor: '#f87372',
+        confirmButtonAriaLabel: 'Iniciar el juego',
+
+    }).then(() => {
+        selectLevel();
+    });
+

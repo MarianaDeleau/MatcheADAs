@@ -129,5 +129,15 @@ filter: drop-shadow(2px 2px 2px #3b3636) ;
     width: 100px;
     height:40px;
     border: 2px solid #f87372;
+    background-color: #f87372;
     font-family: 'Poppins';
+   
 }
+.swal-title {
+    font-size: 30px;
+}
+.swal-button {
+    position: relative;
+    right: 60px;
+    bottom: 10px;
+  }
