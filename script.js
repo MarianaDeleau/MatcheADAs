@@ -319,15 +319,15 @@ const searchHorizontalMatch = () => {
     searchHorizontalMatch()
 
     setTimeout(() => {
-    remover();
+    remove();
     }, 4000)
 
     setTimeout(() => {
-    refrescar();
+    refresh();
     }, 6000)
 
     // setTimeout(() => {
-    //     rellenar()
+    //     refill()
     // }, 8000)
 
 }
@@ -335,11 +335,11 @@ const searchHorizontalMatch = () => {
 
 // ######### REMUEVE MATCHES 
 
-const remover = () => {
+const remove = () => {
 
-    let aRemover= document.getElementsByClassName('remove')
+    let toRemove= document.getElementsByClassName('remove')
     
-        for (let item of aRemover){
+        for (let item of toRemove){
     
             
             item.innerText=null;
@@ -351,17 +351,34 @@ const remover = () => {
     // ######### QUITA CLASS REMOVE DE DIV DESPUES DE MOVER FICHAS
 
 
-const refrescar = () => {
+const refresh = () => {
 
-    let aRefrescar = document.getElementsByClassName('cell')
+    let toRefresh = document.getElementsByClassName('cell')
     
     
-    for (let i=0; i<aRefrescar.length; i++){
+    for (let i=0; i<toRefresh.length; i++){
     
-        aRefrescar[i].classList.remove('remove')
+        toRefresh[i].classList.remove('remove')
         
     
     }
     
     }
     
+    // ######### RELLENA
+
+const refill = () => {
+
+    let toRefill = document.getElementsByClassName('cell');
+
+    for(let i=0; i<toRefill.length; i++) {
+    
+    if(toRefill[i].innerText==="") {
+
+        toRefill[i].innerText=randomItems()
+
+    }
+
+}
+
+}
