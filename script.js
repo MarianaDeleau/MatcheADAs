@@ -7,21 +7,6 @@ let emoji=['🐷', '🐶', '🐸', '🐮', '🐭', '🐱', ]
 let matrizSize;
 let itemSize;
 
-// leer matriz
-const matrizFinder = () => {  
-  let matriz;
-  matriz = new Array(matrizSize);
-  for(let i = 0; i < matrizSize; i++) {
-    matriz[i] = new Array(matrizSize)
-  };
-  for(let i = 0; i < matrizSize; i++) {
-    for(let j = 0; j < matrizSize; j++) {
-      matriz[i][j] = document.querySelector(`[data-x="${j}"][data-y="${i}"]`).innerText;
-    }
-  }
-  console.log("+++matriz+++", matriz)
-  return matriz;
-}
 
 //DEVUELVE EMOJI SUELTO
 
@@ -89,9 +74,6 @@ const generateGrid =(matrizSize, itemSize)=> {
             //celda.style.border = '1px solid #000';
             celda.classList.add('cell')
 
-            //para ver coordenadas
-            //celda.innerText=`${row} ${column}`
-
             celda.style.textAlign= 'center'
             celda.style.verticalAlign='center'
             celda.style.fontSize='30px';
@@ -138,18 +120,21 @@ const selectLevel = () => {
             matrizSize=9
             itemSize=56
             generateGrid(matrizSize, itemSize);
+            searchMatches();
             break;
             
         case 'medio':
             matrizSize=8
             itemSize=63
             generateGrid(matrizSize, itemSize);
+            searchMatches();
             break;
             
         case 'dificil':
             matrizSize=7
             itemSize=72
             generateGrid(matrizSize, itemSize);
+            searchMatches();
             break;
 
         default:
@@ -250,43 +235,42 @@ const switchCell = (a,b) =>{
 }
 
 
-const searchHorizontalMatch = (matriz) => {
+// ######### BUSCA MATCHES VERTICAL
 
-    for(let i = 0; i < matriz.length; i++) {
-  
-        const array = matriz[i]; 
-        let previous; 
-        let founded=0;
-        let times=3 
-        
-    for(let j = 0; j < array.length; j++) {
-               
-        if(array[j] === previous) {
+const searchVerticalMatch = () => {
 
-          founded++
+    for(let i = 0; i < matrizSize; i++) {
 
-          } else {
-            founded=1
-          }
-
-          if(founded>=times){
-                   
-              //return true;
-              console.log(true)
-              
-          } else {
-
-            console.log(false)
-          }
+      const column = document.querySelectorAll(`[data-y='${i}']`)
           
-          previous=array[j]
+              
+        for(let j = 0; j < column.length-2; j++) {
+            
+          
+            if(column[j].innerText === column[j+1].innerText && column[j].innerText === column[j+2].innerText) {
+                
+               const itemFound=column[j].innerText
 
+                for(let k = j ; k<column.length; k++) {
 
-    }
+                    if(itemFound===column[k].innerText){
+
+                    column[k].classList.add('remove')
+
+                    } else{
+
+                        break; 
+
+                    }
+
+                }
+            }  
+        }
         
-}
+    }
 
 }
+
 
 
 const searchVerticalMatch = (matriz) => {
