@@ -271,51 +271,44 @@ const searchVerticalMatch = () => {
 
 }
 
+// ######### BUSCA MATCHES HORIZONTAL
 
+const searchHorizontalMatch = () => {
 
-const searchVerticalMatch = (matriz) => {
+    for(let i = 0; i < matrizSize; i++) {
 
-    const itemsPorArray = matriz[0].length; 
-  
-        for(let j = 0; j < itemsPorArray; j++) {      
-  
-                let previous; 
-                let founded=0;
-                const times=3
-    
-            for(let i = 0; i < matriz.length; i++){
-  
-                    if(previous===matriz[i][j]) {
-          
-                    founded++
-          
-                    } else {
-                        founded=1
-                    }
-          
-          
-                    if(founded>=times){
+            const row = document.querySelectorAll(`[data-x='${i}']`)
+
+            for(let j = 0; j < row.length-2; j++) {
+            
+                if(row[j].innerText === row[j+1].innerText && row[j].innerText === row[j+2].innerText) {
                     
-                        //return true;
-                        console.log(true)
-                        
-                    } else {
-                        
-                        console.log(false)
-  
+                const itemFound=row[j].innerText
+    
+                    for(let k = j ; k<row.length; k++) {
+    
+                        if(itemFound===row[k].innerText){
+    
+                        row[k].classList.add('remove')
+    
+                        } else{
+    
+                            break; 
+    
+                        }
                     }
-                      
-                    previous=matriz[i][j]
-          }
-          
-      }
-  
-  }
+                }        
+
+            }
+
+    }
+
+}
   
   const searchMatches = () => {
 
-    searchVerticalMatch(matrizFinder());
-    searchHorizontalMatch(matrizFinder())
+    searchVerticalMatch();
+    searchHorizontalMatch();
   
   }
   
