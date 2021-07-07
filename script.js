@@ -347,3 +347,21 @@ const remover = () => {
         }
     
     }
+
+    // ######### QUITA CLASS REMOVE DE DIV DESPUES DE MOVER FICHAS
+
+
+const refrescar = () => {
+
+    let aRefrescar = document.getElementsByClassName('cell')
+    
+    
+    for (let i=0; i<aRefrescar.length; i++){
+    
+        aRefrescar[i].classList.remove('remove')
+        
+    
+    }
+    
+    }
+    
