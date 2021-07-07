@@ -304,11 +304,30 @@ const searchHorizontalMatch = () => {
     }
 
 }
-  
-  const searchMatches = () => {
+
+
+// ######### BUSCA MATCHES GENERAL 
+
+
+ const searchMatches = () => {
 
     searchVerticalMatch();
-    searchHorizontalMatch();
-  
-  }
-  
+    //remover();
+    // refrescar();
+
+    // setTimeout(() => {
+    searchHorizontalMatch()
+
+    setTimeout(() => {
+    remover();
+    }, 4000)
+
+    setTimeout(() => {
+    refrescar();
+    }, 6000)
+
+    // setTimeout(() => {
+    //     rellenar()
+    // }, 8000)
+
+}
