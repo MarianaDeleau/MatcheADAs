@@ -331,3 +331,19 @@ const searchHorizontalMatch = () => {
     // }, 8000)
 
 }
+
+
+// ######### REMUEVE MATCHES 
+
+const remover = () => {
+
+    let aRemover= document.getElementsByClassName('remove')
+    
+        for (let item of aRemover){
+    
+            
+            item.innerText=null;
+    
+        }
+    
+    }
