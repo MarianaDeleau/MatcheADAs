@@ -385,3 +385,25 @@ const remove = () => {
 
 // }
 
+// ######### DESCIENDE
+
+const descend = () => {
+
+    const toDescend = document.getElementsByClassName('cell');
+    
+    
+        for(let i = toDescend.length-1; i >=0+matrizSize; i--) {
+    
+            const topItem = toDescend[i-matrizSize];
+            const auxStyleTopItem= topItem.style.top;
+            const styleItem=toDescend[i].style.top
+                
+                    if(toDescend[i].innerText==="") {
+                    
+                        topItem.style.top=styleItem
+                        toDescend[i].style.top=auxStyleTopItem
+                    
+                }
+    
+        }
+    }
