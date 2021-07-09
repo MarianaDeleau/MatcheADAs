@@ -8,7 +8,7 @@ let matrizSize;
 let itemSize;
 
 
-//DEVUELVE EMOJI SUELTO
+//######DEVUELVE EMOJI SUELTO
 
 const randomItems =() => {
 
@@ -20,7 +20,7 @@ const randomItems =() => {
 }
 
 
-//INTERCAMBIA ANIMALITOS
+//######INTERCAMBIA ANIMALITOS
 
 let selectedElement = null;
 let clickedElement = null;
@@ -56,7 +56,7 @@ const clickItem = (e) => {
     }
 };
 
-// ###### Función que genera la grilla
+//###### GENERA LA GRILLA
 const generateGrid =(matrizSize, itemSize)=> {
 
     for(let row=0; row<matrizSize; row++){
@@ -90,8 +90,8 @@ const generateGrid =(matrizSize, itemSize)=> {
 }
 }
 
-//GENERA EL TAMAÑO DE LA GRILLA
-//######### ELEGIR DIFICULTAD DE JUEGO ········
+//######GENERA EL TAMAÑO DE LA GRILLA
+//######### ELEGIR DIFICULTAD DE JUEGO ######
 
 const selectLevel = () => {
     swal({
@@ -145,7 +145,7 @@ const selectLevel = () => {
     });
             
 };
-//######### MENSAJE DE INICIO ········
+//######### MENSAJE DE INICIO ######
 
     Swal.fire({
         title: '¡Bienvenida!',
@@ -164,10 +164,19 @@ const selectLevel = () => {
         selectLevel();
     });
 
+// //######### MENSAJE DE INFORMACION ######
+// const info = document.getElementById('info');
+
+// const infoBtn = () => {
+
+    
+
+
+// }
 
 
 
-    // // ######### TIMER
+    // // ######### TIMER ######
     // //está en window por ahora. Cuando tengamos el sweet alert tenemos que cambiar y poner un evento de click en el boton de empezar.  Lo mismo con el if en duration <= 0, que debe saltar la ventana y no reiniciar
     // let duration = 30;
     // let timer = document.getElementById("timer");
@@ -204,6 +213,10 @@ const selectLevel = () => {
 
     }
 
+
+
+// // ######### INTERCAMBIA CELDAS ######
+
 const switchCell = (a,b) =>{
 
      //Almaceno en variable auxiliar el elemento clickeado
@@ -235,7 +248,7 @@ const switchCell = (a,b) =>{
 }
 
 
-// ######### BUSCA MATCHES VERTICAL
+// ######### BUSCA MATCHES VERTICAL#########
 
 const searchVerticalMatch = () => {
 
@@ -271,7 +284,7 @@ const searchVerticalMatch = () => {
 
 }
 
-// ######### BUSCA MATCHES HORIZONTAL
+// ######### BUSCA MATCHES HORIZONTAL #########
 
 const searchHorizontalMatch = () => {
 
@@ -306,25 +319,19 @@ const searchHorizontalMatch = () => {
 }
 
 
-// ######### BUSCA MATCHES GENERAL 
+// ######### BUSCA MATCHES GENERAL #########
 
 
  const searchMatches = () => {
 
     searchVerticalMatch();
-    //remover();
-    // refrescar();
-
+   
     // setTimeout(() => {
     searchHorizontalMatch()
 
     setTimeout(() => {
     remove();
     }, 4000)
-
-    setTimeout(() => {
-    refresh();
-    }, 6000)
 
     // setTimeout(() => {
     //     refill()
@@ -333,52 +340,48 @@ const searchHorizontalMatch = () => {
 }
 
 
-// ######### REMUEVE MATCHES 
+// ######### REMUEVE MATCHES #########
 
 const remove = () => {
 
-    let toRemove= document.getElementsByClassName('remove')
+    for(let y = 0; y < matrizSize; y++) {
+
+        for(let x = 0; x < matrizSize; x++) {
+
+            const item = document.querySelector(`[data-x="${x}"][data-y="${y}"]`)
     
-        for (let item of toRemove){
-    
-            
-            item.innerText=null;
-    
+            console.log(item)
+
+            if(item.classList.contains('remove')) {
+
+                item.innerText=null;
+                item.classList.remove('remove')
+
+
+            }
         }
-    
-    }
-
-    // ######### QUITA CLASS REMOVE DE DIV DESPUES DE MOVER FICHAS
-
-
-const refresh = () => {
-
-    let toRefresh = document.getElementsByClassName('cell')
-    
-    
-    for (let i=0; i<toRefresh.length; i++){
-    
-        toRefresh[i].classList.remove('remove')
-        
-    
-    }
-    
-    }
-    
-    // ######### RELLENA
-
-const refill = () => {
-
-    let toRefill = document.getElementsByClassName('cell');
-
-    for(let i=0; i<toRefill.length; i++) {
-    
-    if(toRefill[i].innerText==="") {
-
-        toRefill[i].innerText=randomItems()
 
     }
 
 }
 
-}
+   
+
+// ######### RELLENA #########
+
+// const refill = () => {
+
+//     let toRefill = document.getElementsByClassName('cell');
+
+//     for(let i=0; i<toRefill.length; i++) {
+    
+//     if(toRefill[i].innerText==="") {
+
+//         toRefill[i].innerText=randomItems()
+
+//     }
+
+// }
+
+// }
+
