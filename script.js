@@ -164,7 +164,7 @@ const selectLevel = () => {
         selectLevel();
     });
 
-    
+
 // ######### MENSAJE DE INFORMACION ######
 const info = document.getElementById('info');
 
@@ -185,10 +185,12 @@ const infoBtn = () => {
     
 }
 info.addEventListener('click', infoBtn);
+
+
 // ######### MENSAJE DE REINICIAR JUEGO ######
+
 const restartBtn = document.getElementById('restart')
 const restarted = () => {
-
     swal({
         title: '¿Reiniciar Juego?',
         text: 'Perderás el puntaje acumulado', 
@@ -204,7 +206,9 @@ const restarted = () => {
         }
     }).then((value) => {
         if (value === 'aceptar') {
-            // selectLevel(); VER PORQUE DUPLICA ?
+
+            // selectLevel(); // DUPLICA ??
+            
         } else {
             //cancelar
         }
