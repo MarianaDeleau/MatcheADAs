@@ -129,5 +129,10 @@ filter: drop-shadow(2px 2px 2px #3b3636) ;
     width: 100px;
     height:40px;
     border: 2px solid #f87372;
+    background-color: #f87372;
     font-family: 'Poppins';
+}
+.icon:hover {
+    transform: rotate(-180deg);
+    transition-duration: 0.2s;
 }
