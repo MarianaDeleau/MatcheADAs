@@ -58,7 +58,6 @@ const clickItem = (e) => {
 
 //###### GENERA LA GRILLA
 const generateGrid =(matrizSize, itemSize)=> {
-
     for(let row=0; row<matrizSize; row++){
 
         for(let column=0; column<matrizSize; column++){
@@ -93,7 +92,7 @@ const generateGrid =(matrizSize, itemSize)=> {
 //######GENERA EL TAMAÑO DE LA GRILLA
 //######### ELEGIR DIFICULTAD DE JUEGO ######
 
-const selectLevel = () => {
+const selectLevel = () => {    
     swal({
         title: 'Nuevo Juego',
         buttons: {
@@ -120,6 +119,7 @@ const selectLevel = () => {
             matrizSize=9
             itemSize=56
             generateGrid(matrizSize, itemSize);
+            callTimer();
             searchMatches();
             break;
             
@@ -127,6 +127,7 @@ const selectLevel = () => {
             matrizSize=8
             itemSize=63
             generateGrid(matrizSize, itemSize);
+            callTimer();
             searchMatches();
             break;
             
@@ -134,6 +135,7 @@ const selectLevel = () => {
             matrizSize=7
             itemSize=72
             generateGrid(matrizSize, itemSize);
+            callTimer();
             searchMatches();
             break;
 
@@ -206,11 +208,10 @@ const restarted = () => {
         }
     }).then((value) => {
         if (value === 'aceptar') {
-
-            // selectLevel(); // DUPLICA ??
+            selectLevel();
             
         } else {
-            //cancelar
+            window.location.reload();
         }
     });
 }
@@ -218,18 +219,6 @@ restartBtn.addEventListener('click', restarted)
 
 
 
-    // // ######### TIMER ######
-    // //está en window por ahora. Cuando tengamos el sweet alert tenemos que cambiar y poner un evento de click en el boton de empezar.  Lo mismo con el if en duration <= 0, que debe saltar la ventana y no reiniciar
-    // let duration = 30;
-    // let timer = document.getElementById("timer");
-    // window.setInterval(function(){
-    //   timer.innerHTML = duration;
-    //   duration--; //aqui es solo para descir que debe decrementar. si ponemos ++ seria un contador de tiempo.
-    //   duration = duration < 10 ? "0" + duration : duration; // eso es solo estético, para que quede con dos algarismo cuando los numeros sean menores que 10.
-    //   if (duration <= 0){
-    //     window.location.reload();
-    //   }
-    // },1000); // esos 1000 son equivalentes a un segundo, ellos es que dicen que a cada segundo debe cambiar lo que vemos en pantalla.
 
     let selectedItem = null;
 
@@ -255,6 +244,19 @@ restartBtn.addEventListener('click', restarted)
 
     }
 
+    const callTimer = () =>{
+        let duration = 4;
+        let timer = document.getElementById("timer");
+        const interval = setInterval(function(){
+        timer.innerHTML = duration;
+        duration--; 
+        if (duration === -1){
+        restart();
+        clearInterval(interval);
+        }
+        },1000);
+    }
+    
 
 
 // // ######### INTERCAMBIA CELDAS ######
