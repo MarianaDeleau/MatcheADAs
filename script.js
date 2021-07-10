@@ -243,6 +243,31 @@ restartBtn.addEventListener('click', restarted)
         return false;
 
     }
+    const reset= () => {
+        swal({
+            title: 'Juego terminado',
+            text: 'Puntaje XXXX', 
+            buttons: {
+                aceptar: {
+                    text:'Reiniciar',
+                    className: 'btn-play',
+                },
+                cancelar: {
+                    text:'Cancelar',
+                    className: 'btn-play',
+                },
+            }
+        }).then((value) => {
+            if (value === 'aceptar') {
+                selectLevel()
+                
+                
+            } else {
+                window.location.reload();
+            }
+        });
+    }
+    
 
     const callTimer = () =>{
         let duration = 4;
@@ -251,7 +276,7 @@ restartBtn.addEventListener('click', restarted)
         timer.innerHTML = duration;
         duration--; 
         if (duration === -1){
-        restart();
+        reset();
         clearInterval(interval);
         }
         },1000);
