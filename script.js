@@ -58,6 +58,7 @@ const clickItem = (e) => {
 
 //###### GENERA LA GRILLA
 const generateGrid =(matrizSize, itemSize)=> {
+    grid.innerHTML = "";
     for(let row=0; row<matrizSize; row++){
 
         for(let column=0; column<matrizSize; column++){
