@@ -325,13 +325,15 @@ const searchHorizontalMatch = () => {
  const searchMatches = () => {
 
     searchVerticalMatch();
-   
-    // setTimeout(() => {
     searchHorizontalMatch()
 
     setTimeout(() => {
     remove();
     }, 4000)
+
+    setTimeout(() => {
+        descend()
+    }, 5000)
 
     // setTimeout(() => {
     //     refill()
@@ -386,24 +388,37 @@ const remove = () => {
 // }
 
 // ######### DESCIENDE
-
 const descend = () => {
 
-    const toDescend = document.getElementsByClassName('cell');
-    
-    
-        for(let i = toDescend.length-1; i >=0+matrizSize; i--) {
-    
-            const topItem = toDescend[i-matrizSize];
-            const auxStyleTopItem= topItem.style.top;
-            const styleItem=toDescend[i].style.top
-                
-                    if(toDescend[i].innerText==="") {
+    for(let x = matrizSize-1; x >=0; x--) {
+ 
+        for(let y = matrizSize-1; y >=1 ; y--) {
+     
+            const item = document.querySelector(`[data-y="${y}"][data-x="${x}"]`)
+            
+            
+                                       
+                if(item.innerText==="") {
                     
-                        topItem.style.top=styleItem
-                        toDescend[i].style.top=auxStyleTopItem
-                    
+                        emptyItem=item   
+                         
+                    for(let w = y; w > 0; w--){
+
+                        const topItem = document.querySelector(`[data-y="${w-1}"][data-x="${x}"]`)
+                       
+                        if(topItem.innerText!==""){
+                            
+                            emptyItem.innerText=topItem.innerText;
+                            topItem.innerText="";
+                            break;
+                        }
+
+                    }
+            
                 }
-    
+
         }
+
     }
+
+}
