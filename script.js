@@ -271,7 +271,7 @@ restartBtn.addEventListener('click', restarted)
     
 
     const callTimer = () =>{
-        let duration = 4;
+        let duration = 30;
         let timer = document.getElementById("timer");
         const interval = setInterval(function(){
         timer.innerHTML = duration;
@@ -324,35 +324,40 @@ const searchVerticalMatch = () => {
 
     for(let i = 0; i < matrizSize; i++) {
 
-      const column = document.querySelectorAll(`[data-y='${i}']`)
-          
+        const column = [];
+        for (let aux = 0; aux < matrizSize; aux++) {
+
+            column.push(
+                document.querySelector(`[data-x="${aux}"][data-y='${i}']`)
+                );
+        }
               
         for(let j = 0; j < column.length-2; j++) {
             
           
-            if(column[j].innerText === column[j+1].innerText && column[j].innerText === column[j+2].innerText) {
+            if(
+                column[j].innerText === column[j + 1].innerText && 
+                column[j].innerText === column[j + 2].innerText
+                ) {
                 
-               const itemFound=column[j].innerText
+               const itemFound=column[j].innerText;
 
                 for(let k = j ; k<column.length; k++) {
 
-                    if(itemFound===column[k].innerText){
+                    if(itemFound === column[k].innerText){
 
-                    column[k].classList.add('remove')
+                        column[k].classList.add('remove');
 
                     } else{
-
+                        j = k - 1;
                         break; 
 
                     }
-
                 }
             }  
         }
-        
     }
-
-}
+};
 
 // ######### BUSCA MATCHES HORIZONTAL #########
 
@@ -360,33 +365,38 @@ const searchHorizontalMatch = () => {
 
     for(let i = 0; i < matrizSize; i++) {
 
-            const row = document.querySelectorAll(`[data-x='${i}']`)
+        const row = [];
+		for (let aux = 0; aux < matrizSize; aux++) {
+			row.push(
+				document.querySelector(`[data-x="${i}"][data-y='${aux}']`)
+			);
+		}
 
-            for(let j = 0; j < row.length-2; j++) {
+        for(let j = 0; j < row.length-2; j++) {
             
-                if(row[j].innerText === row[j+1].innerText && row[j].innerText === row[j+2].innerText) {
+            if(
+                row[j].innerText === row[j+1].innerText &&
+                row[j].innerText === row[j+2].innerText
+                ) {
                     
-                const itemFound=row[j].innerText
+            const itemFound=row[j].innerText
     
-                    for(let k = j ; k<row.length; k++) {
+                for(let k = j ; k<row.length; k++) {
     
-                        if(itemFound===row[k].innerText){
+                    if(itemFound===row[k].innerText){
     
-                        row[k].classList.add('remove')
+                    row[k].classList.add('remove')
     
-                        } else{
+                    } else{
+                        j = k - 1;
+                        break; 
     
-                            break; 
-    
-                        }
                     }
-                }        
-
-            }
-
+                }
+            }        
+        }
     }
-
-}
+};
 
 
 // ######### BUSCA MATCHES GENERAL #########
@@ -399,15 +409,15 @@ const searchHorizontalMatch = () => {
 
     setTimeout(() => {
     remove();
-    }, 4000)
+    }, 3000)
 
     setTimeout(() => {
         descend()
-    }, 5000)
+    }, 3000)
 
-    // setTimeout(() => {
-    //     refill()
-    // }, 8000)
+    setTimeout(() => {
+        refill()
+    }, 5000)
 
 }
 
@@ -420,10 +430,10 @@ const remove = () => {
 
         for(let x = 0; x < matrizSize; x++) {
 
-            const item = document.querySelector(`[data-x="${x}"][data-y="${y}"]`)
+            const item = document.querySelector(
+                `[data-x="${x}"][data-y="${y}"]`
+                );
     
-            console.log(item)
-
             if(item.classList.contains('remove')) {
 
                 item.innerText=null;
@@ -432,30 +442,26 @@ const remove = () => {
 
             }
         }
-
     }
-
-}
+};
 
    
 
 // ######### RELLENA #########
 
-// const refill = () => {
+const refill = () => {
 
-//     let toRefill = document.getElementsByClassName('cell');
+    let toRefill = document.getElementsByClassName('cell');
 
-//     for(let i=0; i<toRefill.length; i++) {
+    for(let i=0; i<toRefill.length; i++) {
     
-//     if(toRefill[i].innerText==="") {
+        if(toRefill[i].innerText==="") {
 
-//         toRefill[i].innerText=randomItems()
+            toRefill[i].innerText=randomItems()
 
-//     }
-
-// }
-
-// }
+        }
+    }
+};
 
 // ######### DESCIENDE
 const descend = () => {
@@ -476,10 +482,10 @@ const descend = () => {
 
                         const topItem = document.querySelector(`[data-y="${w-1}"][data-x="${x}"]`)
                        
-                        if(topItem.innerText!==""){
-                            
-                            emptyItem.innerText=topItem.innerText;
-                            topItem.innerText="";
+                        if(topItem.innerText !== ""){
+                            switchCell(emptyItem, topItem)
+                            // emptyItem.innerText=topItem.innerText;
+                            // topItem.innerText="";
                             break;
                         }
 
