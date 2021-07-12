@@ -200,7 +200,7 @@ const restarted = () => {
         text: 'Perderás el puntaje acumulado', 
         buttons: {
             aceptar: {
-                text:'Nuevo Juego',
+                text:'Nuevo',
                 className: 'btn-play',
             },
             cancelar: {
