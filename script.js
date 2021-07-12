@@ -1,11 +1,16 @@
 
 const grid=document.getElementById('grid')
-
+const MatchPoints = 100;
 
 let emoji=['🐷', '🐶', '🐸', '🐮', '🐭', '🐱', ]
 
 let matrizSize;
 let itemSize;
+let score = 0
+
+
+const addScore = document.getElementById('score')
+addScore.innerHTML = score
 
 
 //######DEVUELVE EMOJI SUELTO
@@ -119,9 +124,13 @@ const selectLevel = () => {
         case 'facil':
             matrizSize=9
             itemSize=56
+            score = 0;
+            addScore.innerHTML = score;
             generateGrid(matrizSize, itemSize);
             callTimer();
             searchMatches();
+            
+
             break;
             
         case 'medio':
@@ -130,6 +139,8 @@ const selectLevel = () => {
             generateGrid(matrizSize, itemSize);
             callTimer();
             searchMatches();
+            score = 0;
+            addScore.innerHTML = score;
             break;
             
         case 'dificil':
@@ -138,12 +149,14 @@ const selectLevel = () => {
             generateGrid(matrizSize, itemSize);
             callTimer();
             searchMatches();
+            score= 0;
+            addScore.innerHTML = score;
             break;
 
         default:
             swal({icon:'error'});
             selectLevel();
-        }
+      }
             
     });
             
@@ -193,6 +206,7 @@ info.addEventListener('click', infoBtn);
 // ######### MENSAJE DE REINICIAR JUEGO ######
 
 const restartBtn = document.getElementById('restart')
+ let duration = 0
 const restarted = () => {
     swal({
         title: '¿Reiniciar Juego?',
@@ -247,7 +261,7 @@ restartBtn.addEventListener('click', restarted)
     const reset= () => {
         swal({
             title: 'Juego terminado',
-            text: 'Puntaje XXXX', 
+            text : 'Puntaje', 
             buttons: {
                 aceptar: {
                     text:'Reiniciar',
@@ -281,6 +295,7 @@ restartBtn.addEventListener('click', restarted)
         clearInterval(interval);
         }
         },1000);
+         
     }
     
 
@@ -425,6 +440,7 @@ const searchHorizontalMatch = () => {
 // ######### REMUEVE MATCHES #########
 
 const remove = () => {
+let matchCount = 0;
 
     for(let y = 0; y < matrizSize; y++) {
 
@@ -438,11 +454,14 @@ const remove = () => {
 
                 item.innerText=null;
                 item.classList.remove('remove')
-
+                matchCount += 1;
 
             }
         }
     }
+    scoreAdd(matchCount);
+    // console.log('++++ score +++ ', score)
+    addScore.innerHTML = score
 };
 
    
@@ -463,7 +482,7 @@ const refill = () => {
     }
 };
 
-// ######### DESCIENDE
+// ######### DESCIENDE ######### 
 const descend = () => {
 
     for(let x = matrizSize-1; x >=0; x--) {
@@ -497,4 +516,12 @@ const descend = () => {
       
     }
 
+}
+
+// ######### SUMA PUNTOS #########
+
+
+const scoreAdd = (matchQuantity) => {
+  score = score + matchQuantity * MatchPoints;
+ 
 }
