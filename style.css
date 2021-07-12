@@ -48,23 +48,28 @@ button{
 }
 
 .cell{
-  border:1px solid transparent;
+  
   border-radius: 10px;
+  box-sizing: border-box;
 
 }
 
 .cell:active{
-  border:2px solid  #f87372;
+  border:1px solid  #f87372;
   border-radius: 10px;
-  transition-duration: 0.1s;
+  transition-duration: 0.2s;
 }
 
+.cell:hover{
+    transform: scale(1.2);
+    transition-duration: 0.2s;
+  }
 
 .container{
     width: 600px;
     height: 100%;
     padding: 20px 0;
-    margin-top: 20px;
+    margin-top: 10px;
     background-color: transparent;
     display: flex;
     flex-direction: column;
@@ -77,12 +82,14 @@ button{
     height: 504px;
     border-radius: 5px;
     background-color:rgb(255 255 255 / 40%);
-    border: 4px #f87372 solid;
+    border: 10px ridge #f87372;
     position: relative;
+    box-sizing: content-box;
+    /* filter: drop-shadow(2px 2px 2px grey) */
 }
 
 .control{
-    width: 504px;
+    width: 524px;
     height: 50px;
     background-color: #f87372;
     color: #FFF;
@@ -90,13 +97,14 @@ button{
     border-radius: 10px;
     display: flex;
     flex-direction: row;
-    margin: 20px 0;  
+    margin: 15px 0;  
     filter: drop-shadow(2px 2px 2px #3b3636) ;  
 }
 
 .points{
     width: 50%;
     height: 100%;
+    font-size: 21px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -135,4 +143,9 @@ filter: drop-shadow(2px 2px 2px #3b3636) ;
 .icon:hover {
     transform: rotate(-180deg);
     transition-duration: 0.2s;
+}
+
+.btn-play{
+   display: flex;
+   justify-content: center;
 }
