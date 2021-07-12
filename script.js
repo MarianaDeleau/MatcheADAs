@@ -220,7 +220,30 @@ const restarted = () => {
 }
 restartBtn.addEventListener('click', restarted)
 
-
+const reset= () => {
+    swal({
+        title: 'Juego terminado',
+        text : 'Puntaje: ' + score, 
+        buttons: {
+            aceptar: {
+                text:'Reiniciar',
+                className: 'btn-play',
+            },
+            cancelar: {
+                text:'Cancelar',
+                className: 'btn-play',
+            },
+        }
+    }).then((value) => {
+        if (value === 'aceptar') {
+            selectLevel()
+            
+            
+        } else {
+            window.location.reload();
+        }
+    });
+}
 
 
     let selectedItem = null;
@@ -246,30 +269,6 @@ restartBtn.addEventListener('click', restarted)
         return false;
 
     }
-    const reset= () => {
-        swal({
-            title: 'Juego terminado',
-            text : 'Puntaje', 
-            buttons: {
-                aceptar: {
-                    text:'Reiniciar',
-                    className: 'btn-play',
-                },
-                cancelar: {
-                    text:'Cancelar',
-                    className: 'btn-play',
-                },
-            }
-        }).then((value) => {
-            if (value === 'aceptar') {
-                selectLevel()
-                
-                
-            } else {
-                window.location.reload();
-            }
-        });
-    }
     
 
     const callTimer = () =>{
@@ -283,12 +282,11 @@ restartBtn.addEventListener('click', restarted)
         clearInterval(interval);
         }
         },1000);
-         
     }
     
 
 
-// // ######### INTERCAMBIA CELDAS ######
+// ######### INTERCAMBIA CELDAS ######
 
 const switchCell = (a,b) =>{
 
@@ -300,7 +298,7 @@ const switchCell = (a,b) =>{
     b.style.top=a.style.top;
     b.style.left=a.style.left;
    
-    // // Seteo como el animalito del elemento seleccionado la primera vez como el del elemento clickeado la segunda vez
+    // Seteo como el animalito del elemento seleccionado la primera vez como el del elemento clickeado la segunda vez
     a.style.top=auxTop;
     a.style.left=auxLeft;
 
