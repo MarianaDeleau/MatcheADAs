@@ -76,7 +76,7 @@ const generateGrid =(matrizSize, itemSize)=> {
             celda.style.position = 'absolute';
             celda.style.left = `${column*itemSize}px`;
             celda.style.top = `${row*itemSize}px`;
-            //celda.style.border = '1px solid #000';
+            
             celda.classList.add('cell')
 
             celda.style.textAlign= 'center'
@@ -245,6 +245,7 @@ const reset= () => {
     });
 }
 
+// ######### PERMITE MOVER SOLO ADYACENTES ######
 
     let selectedItem = null;
 
@@ -270,6 +271,7 @@ const reset= () => {
 
     }
     
+// ######### CUENTA REGRESIVA ######
 
     const callTimer = () =>{
         let duration = 30;
