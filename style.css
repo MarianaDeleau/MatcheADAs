@@ -23,7 +23,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 font-family: 'Pacifico', cursive;
-background-image: url(https://img.freepik.com/vector-gratis/paisaje-granja-diseno-plano_52683-9442.jpg?size=626&ext=jpg);
+background-image: url(https://images.all-free-download.com/images/graphiclarge/agriculture_farm_drawing_farmer_hill_cock_icons_6834052.jpg);
 background-repeat: no-repeat;
 background-size: cover;
 color: #000;
@@ -48,7 +48,6 @@ button{
 }
 
 .cell{
-  
   border-radius: 10px;
   box-sizing: border-box;
 
@@ -58,6 +57,7 @@ button{
   border:1px solid  #f87372;
   border-radius: 10px;
   transition-duration: 0.2s;
+  filter: drop-shadow(1px 1px 1px #f87372)
 }
 
 .cell:hover{
@@ -81,11 +81,10 @@ button{
     width: 504px;
     height: 504px;
     border-radius: 5px;
-    background-color:rgb(255 255 255 / 40%);
+    background-color:rgb(255 255 255 / 70%);
     border: 10px ridge #f87372;
     position: relative;
     box-sizing: content-box;
-    /* filter: drop-shadow(2px 2px 2px grey) */
 }
 
 .control{
