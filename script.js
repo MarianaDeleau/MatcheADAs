@@ -7,6 +7,7 @@ let emoji=['🐷', '🐶', '🐸', '🐮', '🐭', '🐱', ]
 let matrizSize;
 let itemSize;
 let score = 0
+let duration;
 
 
 const addScore = document.getElementById('score')
@@ -70,18 +71,39 @@ const generateGrid =(matrizSize, itemSize)=> {
             
             const celda = document.createElement('div');
 
-            celda.style.width = `${itemSize}px`;
-            celda.style.height = `${itemSize}px`;
+            const mq = window.matchMedia('(max-width: 500px)');
+            const squareSize = () => {
+                if(mq.matches){
+                    celda.style.width = `${itemSize/2}px`;
+                    celda.style.height = `${itemSize/2}px`;
+                    console.log(`tamanho1: ${celda.width}`)
 
-            celda.style.position = 'absolute';
-            celda.style.left = `${column*itemSize}px`;
-            celda.style.top = `${row*itemSize}px`;
+                    celda.style.position = 'absolute';
+                    celda.style.left = `${column*(itemSize/2)}px`;
+                    celda.style.top = `${row*(itemSize/2)}px`;
+
+                    celda.style.fontSize='20px';
+                }else{
+                    celda.style.width = `${itemSize}px`;
+                    celda.style.height = `${itemSize}px`;
+                    console.log(`tamanho: ${celda.width}`)
+                    celda.style.position = 'absolute';
+                    celda.style.left = `${column*itemSize}px`;
+                    celda.style.top = `${row*itemSize}px`;
+
+                    celda.style.fontSize='30px';
+                }
+            }
+            squareSize(mq)
+            
+            
+            
             //celda.style.border = '1px solid #000';
             celda.classList.add('cell')
 
             celda.style.textAlign= 'center'
             celda.style.verticalAlign='center'
-            celda.style.fontSize='30px';
+            
 
             celda.innerText=randomItems()
 
@@ -127,6 +149,7 @@ const selectLevel = () => {
             score = 0;
             addScore.innerHTML = score;
             generateGrid(matrizSize, itemSize);
+            duration = null;
             callTimer();
             searchMatches();
             
@@ -137,6 +160,7 @@ const selectLevel = () => {
             matrizSize=8
             itemSize=63
             generateGrid(matrizSize, itemSize);
+            duration = null;
             callTimer();
             searchMatches();
             score = 0;
@@ -147,6 +171,7 @@ const selectLevel = () => {
             matrizSize=7
             itemSize=72
             generateGrid(matrizSize, itemSize);
+            duration = null;
             callTimer();
             searchMatches();
             score= 0;
@@ -193,7 +218,6 @@ info.addEventListener('click', infoBtn);
 // ######### MENSAJE DE REINICIAR JUEGO ######
 
 const restartBtn = document.getElementById('restart')
- let duration = 0
 const restarted = () => {
     swal({
         title: '¿Reiniciar Juego?',
@@ -270,9 +294,9 @@ const reset= () => {
 
     }
     
-
+    
     const callTimer = () =>{
-        let duration = 30;
+        duration = 30;
         let timer = document.getElementById("timer");
         const interval = setInterval(function(){
         timer.innerHTML = duration;

@@ -23,6 +23,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 font-family: 'Pacifico', cursive;
+font-size: 16px;
 background-image: url(https://img.freepik.com/vector-gratis/paisaje-granja-diseno-plano_52683-9442.jpg?size=626&ext=jpg);
 background-repeat: no-repeat;
 background-size: cover;
@@ -31,17 +32,18 @@ cursor: pointer;
 }
 
 h1{
-    font-size: 50px;
+    font-size: 3rem;
     text-align: center;
     color: #f87372;
     filter: drop-shadow(2px 2px 2px #3b3636) ;
 
 }
 
+
 button{
     width: 30px;
     height: 30px;
-    font-size: 25px;
+    font-size: 1rem;
     background-color: transparent;
     color: #FFF;
     border-style: none;
@@ -74,7 +76,7 @@ button{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .grid{
@@ -93,7 +95,7 @@ button{
     height: 50px;
     background-color: #f87372;
     color: #FFF;
-    font-size: 25px;
+    font-size: 1rem;
     border-radius: 10px;
     display: flex;
     flex-direction: row;
@@ -102,33 +104,42 @@ button{
 }
 
 .points{
-    width: 50%;
+    width: 70%;
     height: 100%;
-    font-size: 21px;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.btn-control{
+    width: 30%;
+    height: 100%;
+    font-size: 1.5rem;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
 
 .timer{
-width: 120px;
-height: 50px;
-background-color: #f87372;
-color: #FFF;
-font-size: 25px;
-text-align: center;
-border-radius: 10px;
-display: flex;
-justify-content: space-evenly;
-flex-direction: row;
-align-items: center;
-margin: 20px 0;
-filter: drop-shadow(2px 2px 2px #3b3636) ;
+    width: 120px;
+    height: 50px;
+    background-color: #f87372;
+    color: #FFF;
+    font-size: 2rem;
+    text-align: center;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    align-items: center;
+    margin: 20px 0;
+    filter: drop-shadow(2px 2px 2px #3b3636) ;
 }
 
 .modal{
     font-family: 'Poppins';
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: bold;
     color: #000;
 }
@@ -148,4 +159,36 @@ filter: drop-shadow(2px 2px 2px #3b3636) ;
 .btn-play{
    display: flex;
    justify-content: center;
+}
+
+@media screen and (max-width: 500px) {
+    body{
+        font-size: 11px;
+    }
+    h1{
+        font-size: 2rem;;
+    }
+    
+    button, .modal{
+        font-size: 0.7rem;
+    }
+
+    .points{
+        font-size: 1rem;
+    }
+
+    .timer{
+        font-size: 1.3rem;
+    }
+    .container{
+        width: 300px;
+    }
+    .control{
+        width: 272px;
+        font-size: 0.7rem;
+    }
+    .grid {
+        width: 252px;
+        height: 252px;
+    }
 }
