@@ -10,6 +10,7 @@ let score = 0
 let interval;
 
 
+//###### SUMA PUNTAJE ######
 const addScore = document.getElementById('score')
 addScore.innerHTML = score
 
@@ -22,12 +23,11 @@ const randomItems =() => {
     let emojiRandom=emoji[Math.floor(Math.random()*emoji.length)]
 
     return emojiRandom
-    //console.log(emojiRandom)
+   
 }
 
 
-//######INTERCAMBIA ANIMALITOS
-
+//###### INTERCAMBIA ANIMALITOS ######
 let selectedElement = null;
 let clickedElement = null;
 
@@ -39,8 +39,7 @@ const clickItem = (e) => {
 
     } else if (selectedElement != null) {
 
-    // Si ya tengo un elemento seleccionado
-    // Guardo el elemento clickeado
+    // Si ya tengo un elemento seleccionado, guardo el elemento clickeado.
         clickedElement = e.target;
 
        
@@ -51,7 +50,7 @@ const clickItem = (e) => {
             
             if(hasMatch()){
 
-                searchMatches()
+                cleanGrid()
                 selectedElement = null;
                 clickedElement = null;
 
@@ -71,14 +70,14 @@ const clickItem = (e) => {
             const aux=clickedElement;
             clickedElement=null;
             selectedElement=aux;
-            //console.log('NO');
+         
         }
 
         
     }
 };
 
-//###### GENERA LA GRILLA
+//###### GENERA LA GRILLA ######
 const generateGrid =(matrizSize, itemSize)=> {
     grid.innerHTML = "";
     for(let row=0; row<matrizSize; row++){
@@ -129,7 +128,7 @@ const generateGrid =(matrizSize, itemSize)=> {
 }
 }
 
-//######GENERA EL TAMAÑO DE LA GRILLA
+//######### GENERA EL TAMAÑO DE LA GRILLA ###
 //######### ELEGIR DIFICULTAD DE JUEGO ######
 
 const selectLevel = () => {    
@@ -158,11 +157,12 @@ const selectLevel = () => {
         case 'facil':
             matrizSize=9
             itemSize=56
+            generateGrid(matrizSize, itemSize);
+            hasMatch();
+            refreshStartGrid();
+            callTimer();
             score = 0;
             addScore.innerHTML = score;
-            generateGrid(matrizSize, itemSize);
-            callTimer();
-            searchMatches();
             
 
             break;
@@ -171,8 +171,9 @@ const selectLevel = () => {
             matrizSize=8
             itemSize=63
             generateGrid(matrizSize, itemSize);
+            hasMatch();
+            refreshStartGrid();
             callTimer();
-            searchMatches();
             score = 0;
             addScore.innerHTML = score;
             break;
@@ -181,8 +182,9 @@ const selectLevel = () => {
             matrizSize=7
             itemSize=72
             generateGrid(matrizSize, itemSize);
+            hasMatch();
+            refreshStartGrid();
             callTimer();
-            searchMatches();
             score= 0;
             addScore.innerHTML = score;
             break;
@@ -225,7 +227,6 @@ info.addEventListener('click', infoBtn);
 
 
 // ######### MENSAJE DE REINICIAR JUEGO ######
-
 const restartBtn = document.getElementById('restart')
 const restarted = () => {
     swal({
@@ -280,7 +281,6 @@ const reset= () => {
 }
 
 // ######### PERMITE MOVER SOLO ADYACENTES ######
-
     let selectedItem = null;
 
     const isAdjacentItem = (a, b) => {
@@ -307,7 +307,6 @@ const reset= () => {
     
 
 // ######### CUENTA REGRESIVA ######
-
     const callTimer = () =>{
         let duration = 30;
         let timer = document.getElementById("timer");
@@ -324,7 +323,6 @@ const reset= () => {
 
 
 // ######### INTERCAMBIA CELDAS ######
-
 const switchCell = (a,b) =>{
 
      //Almaceno en variable auxiliar el elemento clickeado
@@ -349,15 +347,11 @@ const switchCell = (a,b) =>{
     b.setAttribute('data-x', aux1DataX)
     a.setAttribute('data-y', aux2DataY)
     b.setAttribute('data-y', aux1DataY)
-   
-    
-   
-
+ 
 }
 
 
 // ######### BUSCA MATCHES VERTICAL#########
-
 const searchVerticalMatch = () => {
 
     for(let i = 0; i < matrizSize; i++) {
@@ -398,7 +392,6 @@ const searchVerticalMatch = () => {
 };
 
 // ######### BUSCA MATCHES HORIZONTAL #########
-
 const searchHorizontalMatch = () => {
 
     for(let i = 0; i < matrizSize; i++) {
@@ -436,36 +429,54 @@ const searchHorizontalMatch = () => {
     }
 };
 
+// ######### RETORNA SI HAY MATCHS GENERALES #########
+const hasMatch= () => {
+    
+    searchVerticalMatch();
+    searchHorizontalMatch()
+    
+    return document.querySelectorAll(".remove").length >0;
 
-// ######### BUSCA MATCHES GENERAL #########
+}
 
+// ######### LIMPIA LA GRILLA DE LOS MATCH AL INICIO #########
+const refreshStartGrid = () => {
 
- const searchMatches = () => {
+        remove();
+        descend();    
+        refill();
 
+    if(hasMatch()) {
+        refreshStartGrid()
+    }
+
+}
+
+// ######### LIMPIA LA GRILLA DE LOS MATCH, DESCIENDE ESPACIOS Y VUELVE A RELLENAR #########
+ const cleanGrid = () => {
    
-   // setTimeout(() => {
+   setTimeout(() => {
     remove();
-   // }, 3000)
+    }, 300)
 
-    //setTimeout(() => {
+    setTimeout(() => {
         descend()
-    //}, 3000)
+    }, 500)
 
-   // setTimeout(() => {
+    setTimeout(() => {
         refill()
-   // }, 5000)
+    }, 800)
 
-    //setTimeout(() => {
+    setTimeout(() => {
  if(hasMatch()) {
-     searchMatches()
+    cleanGrid()
  }
-//}, 5000)
+}, 1000)
 
 }
 
 
 // ######### REMUEVE MATCHES #########
-
 const remove = () => {
 let matchCount = 0;
 
@@ -487,14 +498,12 @@ let matchCount = 0;
         }
     }
     scoreAdd(matchCount);
-    // console.log('++++ score +++ ', score)
     addScore.innerHTML = score
 };
 
    
 
 // ######### RELLENA #########
-
 const refill = () => {
 
     let toRefill = document.getElementsByClassName('cell');
@@ -518,8 +527,6 @@ const descend = () => {
      
             const item = document.querySelector(`[data-y="${y}"][data-x="${x}"]`)
             
-            
-                                       
                 if(item.innerText==="") {
                     
                         emptyItem=item   
@@ -536,30 +543,17 @@ const descend = () => {
                         }
 
                     }
-            
                 }
-
         }
-      
     }
-
 }
 
 // ######### SUMA PUNTOS #########
 
 
 const scoreAdd = (matchQuantity) => {
+
   score = score + matchQuantity * MatchPoints;
  
 }
 
-
-const hasMatch= () => {
-    
-    searchVerticalMatch();
-    searchHorizontalMatch()
-
-    
-    return document.querySelectorAll(".remove").length >0;
-
-}
