@@ -7,7 +7,7 @@ let emoji=['🐷', '🐶', '🐸', '🐮', '🐭', '🐱', ]
 let matrizSize;
 let itemSize;
 let score = 0
-let duration;
+let interval;
 
 
 const addScore = document.getElementById('score')
@@ -161,7 +161,6 @@ const selectLevel = () => {
             score = 0;
             addScore.innerHTML = score;
             generateGrid(matrizSize, itemSize);
-            duration = null;
             callTimer();
             searchMatches();
             
@@ -172,7 +171,6 @@ const selectLevel = () => {
             matrizSize=8
             itemSize=63
             generateGrid(matrizSize, itemSize);
-            duration = null;
             callTimer();
             searchMatches();
             score = 0;
@@ -183,7 +181,6 @@ const selectLevel = () => {
             matrizSize=7
             itemSize=72
             generateGrid(matrizSize, itemSize);
-            duration = null;
             callTimer();
             searchMatches();
             score= 0;
@@ -247,6 +244,7 @@ const restarted = () => {
     }).then((value) => {
         if (value === 'aceptar') {
             selectLevel();
+            clearInterval(interval);
             
         } else {
             // window.location.reload();
@@ -311,9 +309,9 @@ const reset= () => {
 // ######### CUENTA REGRESIVA ######
 
     const callTimer = () =>{
-        duration = 30;
+        let duration = 30;
         let timer = document.getElementById("timer");
-        const interval = setInterval(function(){
+        interval = setInterval(function(){
         timer.innerHTML = duration;
         duration--; 
         if (duration === -1){
