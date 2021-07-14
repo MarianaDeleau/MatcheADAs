@@ -1,17 +1,21 @@
 
 const grid=document.getElementById('grid')
 const MatchPoints = 100;
+const combosPoints = 1;
 
 let emoji=['🐷', '🐶', '🐸', '🐮', '🐭', '🐱', ]
 
 let matrizSize;
 let itemSize;
+let combos = 1;
 let score = 0
 let interval;
 
 
 const addScore = document.getElementById('score')
 addScore.innerHTML = score
+const addCombos = document.getElementById('combos')
+addCombos.innerHTML = combos;
 
 
 //######DEVUELVE EMOJI SUELTO
@@ -32,7 +36,7 @@ let selectedElement = null;
 let clickedElement = null;
 
 const clickItem = (e) => {
-
+    combo = 1;
     if (selectedElement == null) {
     // Si no hay elemento seleccionado, almaceno el target del evento como elemento seleccionado.
         selectedElement = e.target;
@@ -160,6 +164,8 @@ const selectLevel = () => {
             itemSize=56
             score = 0;
             addScore.innerHTML = score;
+            // combos = 1;
+            addCombos.innerHTML = combos;
             generateGrid(matrizSize, itemSize);
             callTimer();
             searchMatches();
@@ -175,6 +181,8 @@ const selectLevel = () => {
             searchMatches();
             score = 0;
             addScore.innerHTML = score;
+            // combos = 1;
+            addCombos.innerHTML = combos;
             break;
             
         case 'dificil':
@@ -185,6 +193,8 @@ const selectLevel = () => {
             searchMatches();
             score= 0;
             addScore.innerHTML = score;
+            // combos = 1;
+            addCombos.innerHTML = combos;
             break;
 
         default:
@@ -326,7 +336,7 @@ const reset= () => {
 // ######### INTERCAMBIA CELDAS ######
 
 const switchCell = (a,b) =>{
-
+     
      //Almaceno en variable auxiliar el elemento clickeado
     const auxTop= b.style.top;
     const auxLeft=b.style.left;
@@ -349,9 +359,6 @@ const switchCell = (a,b) =>{
     b.setAttribute('data-x', aux1DataX)
     a.setAttribute('data-y', aux2DataY)
     b.setAttribute('data-y', aux1DataY)
-   
-    
-   
 
 }
 
@@ -377,7 +384,7 @@ const searchVerticalMatch = () => {
                 column[j].innerText === column[j + 1].innerText && 
                 column[j].innerText === column[j + 2].innerText
                 ) {
-                
+                combosAdd();
                const itemFound=column[j].innerText;
 
                 for(let k = j ; k<column.length; k++) {
@@ -416,7 +423,7 @@ const searchHorizontalMatch = () => {
                 row[j].innerText === row[j+1].innerText &&
                 row[j].innerText === row[j+2].innerText
                 ) {
-                    
+                combosAdd();
             const itemFound=row[j].innerText
     
                 for(let k = j ; k<row.length; k++) {
@@ -467,28 +474,27 @@ const searchHorizontalMatch = () => {
 // ######### REMUEVE MATCHES #########
 
 const remove = () => {
-let matchCount = 0;
-
+    
+    let matchCount = 0;
     for(let y = 0; y < matrizSize; y++) {
-
         for(let x = 0; x < matrizSize; x++) {
-
             const item = document.querySelector(
                 `[data-x="${x}"][data-y="${y}"]`
                 );
-    
             if(item.classList.contains('remove')) {
-
                 item.innerText=null;
                 item.classList.remove('remove')
                 matchCount += 1;
-
             }
         }
     }
-    scoreAdd(matchCount);
-    // console.log('++++ score +++ ', score)
+    scoreAdd();
+    console.log('++++ matchCount +++ ', matchCount)
+    console.log('++++ combos +++ ', combos)
+    
     addScore.innerHTML = score
+    addCombos.innerHTML = combos;
+    combos = 1;
 };
 
    
@@ -533,6 +539,7 @@ const descend = () => {
                             // emptyItem.innerText=topItem.innerText;
                             // topItem.innerText="";
                             break;
+                            
                         }
 
                     }
@@ -548,9 +555,12 @@ const descend = () => {
 // ######### SUMA PUNTOS #########
 
 
-const scoreAdd = (matchQuantity) => {
-  score = score + matchQuantity * MatchPoints;
- 
+const scoreAdd = () => {
+  score = score + MatchPoints * combos;
+ }
+
+function combosAdd() {
+  combos += 1;
 }
 
 
