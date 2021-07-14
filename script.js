@@ -7,8 +7,9 @@ let emoji=['🐷', '🐶', '🐸', '🐮', '🐭', '🐱', ]
 
 let matrizSize;
 let itemSize;
-let score = 0;
 let combos = 1;
+let score = 0
+let interval;
 
 
 const addScore = document.getElementById('score')
@@ -51,8 +52,24 @@ const clickItem = (e) => {
 
             switchCell(selectedElement,clickedElement)
             
-            selectedElement = null;
-            clickedElement = null;
+            
+            if(hasMatch()){
+
+                searchMatches()
+                selectedElement = null;
+                clickedElement = null;
+
+            } else{
+
+                setTimeout(() => {
+                switchCell(selectedElement,clickedElement)
+                selectedElement = null;
+                clickedElement = null;
+                }, 500)
+
+            }
+
+                        
 
         } else {
             const aux=clickedElement;
@@ -73,19 +90,36 @@ const generateGrid =(matrizSize, itemSize)=> {
         for(let column=0; column<matrizSize; column++){
             
             const celda = document.createElement('div');
+            const mq = window.matchMedia('(max-width: 500px)');
+            const squareSize = () => {
+                if(mq.matches){
+                    celda.style.width = `${itemSize/2}px`;
+                    celda.style.height = `${itemSize/2}px`;
+                    console.log(`tamanho1: ${celda.width}`)
 
-            celda.style.width = `${itemSize}px`;
-            celda.style.height = `${itemSize}px`;
+                    celda.style.position = 'absolute';
+                    celda.style.left = `${column*(itemSize/2)}px`;
+                    celda.style.top = `${row*(itemSize/2)}px`;
 
-            celda.style.position = 'absolute';
-            celda.style.left = `${column*itemSize}px`;
-            celda.style.top = `${row*itemSize}px`;
+                    celda.style.fontSize='20px';
+                }else{
+                    celda.style.width = `${itemSize}px`;
+                    celda.style.height = `${itemSize}px`;
+                    console.log(`tamanho: ${celda.width}`)
+                    celda.style.position = 'absolute';
+                    celda.style.left = `${column*itemSize}px`;
+                    celda.style.top = `${row*itemSize}px`;
+
+                    celda.style.fontSize='30px';
+                }
+            }
+            squareSize(mq)
             
             celda.classList.add('cell')
 
             celda.style.textAlign= 'center'
             celda.style.verticalAlign='center'
-            celda.style.fontSize='30px';
+            
 
             celda.innerText=randomItems()
 
@@ -203,7 +237,6 @@ info.addEventListener('click', infoBtn);
 // ######### MENSAJE DE REINICIAR JUEGO ######
 
 const restartBtn = document.getElementById('restart')
- let duration = 0
 const restarted = () => {
     swal({
         title: '¿Reiniciar Juego?',
@@ -221,6 +254,7 @@ const restarted = () => {
     }).then((value) => {
         if (value === 'aceptar') {
             selectLevel();
+            clearInterval(interval);
             
         } else {
             // window.location.reload();
@@ -281,12 +315,13 @@ const reset= () => {
 
     }
     
+
 // ######### CUENTA REGRESIVA ######
 
     const callTimer = () =>{
         let duration = 30;
         let timer = document.getElementById("timer");
-        const interval = setInterval(function(){
+        interval = setInterval(function(){
         timer.innerHTML = duration;
         duration--; 
         if (duration === -1){
@@ -324,10 +359,7 @@ const switchCell = (a,b) =>{
     b.setAttribute('data-x', aux1DataX)
     a.setAttribute('data-y', aux2DataY)
     b.setAttribute('data-y', aux1DataY)
-   
-    
-    searchMatches();
-    //  combos = 1;
+
 }
 
 
@@ -417,20 +449,24 @@ const searchHorizontalMatch = () => {
 
  const searchMatches = () => {
 
-    searchVerticalMatch();
-    searchHorizontalMatch()
-
-    setTimeout(() => {
+   
+   // setTimeout(() => {
     remove();
-    }, 3000)
+   // }, 3000)
 
-    setTimeout(() => {
+    //setTimeout(() => {
         descend()
-    }, 3000)
+    //}, 3000)
 
-    setTimeout(() => {
+   // setTimeout(() => {
         refill()
-    }, 5000)
+   // }, 5000)
+
+    //setTimeout(() => {
+ if(hasMatch()) {
+     searchMatches()
+ }
+//}, 5000)
 
 }
 
@@ -525,4 +561,15 @@ const scoreAdd = () => {
 
 function combosAdd() {
   combos += 1;
+}
+
+
+const hasMatch= () => {
+    
+    searchVerticalMatch();
+    searchHorizontalMatch()
+
+    
+    return document.querySelectorAll(".remove").length >0;
+
 }
