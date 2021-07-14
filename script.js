@@ -47,8 +47,24 @@ const clickItem = (e) => {
 
             switchCell(selectedElement,clickedElement)
             
-            selectedElement = null;
-            clickedElement = null;
+            
+            if(hasMatch()){
+
+                searchMatches()
+                selectedElement = null;
+                clickedElement = null;
+
+            } else{
+
+                setTimeout(() => {
+                switchCell(selectedElement,clickedElement)
+                selectedElement = null;
+                clickedElement = null;
+                }, 500)
+
+            }
+
+                        
 
         } else {
             const aux=clickedElement;
@@ -316,7 +332,7 @@ const switchCell = (a,b) =>{
     b.setAttribute('data-y', aux1DataY)
    
     
-    searchMatches();
+   
 
 }
 
@@ -407,20 +423,24 @@ const searchHorizontalMatch = () => {
 
  const searchMatches = () => {
 
-    searchVerticalMatch();
-    searchHorizontalMatch()
-
-    setTimeout(() => {
+   
+   // setTimeout(() => {
     remove();
-    }, 3000)
+   // }, 3000)
 
-    setTimeout(() => {
+    //setTimeout(() => {
         descend()
-    }, 3000)
+    //}, 3000)
 
-    setTimeout(() => {
+   // setTimeout(() => {
         refill()
-    }, 5000)
+   // }, 5000)
+
+    //setTimeout(() => {
+ if(hasMatch()) {
+     searchMatches()
+ }
+//}, 5000)
 
 }
 
@@ -512,4 +532,15 @@ const descend = () => {
 const scoreAdd = (matchQuantity) => {
   score = score + matchQuantity * MatchPoints;
  
+}
+
+
+const hasMatch= () => {
+    
+    searchVerticalMatch();
+    searchHorizontalMatch()
+
+    
+    return document.querySelectorAll(".remove").length >0;
+
 }
