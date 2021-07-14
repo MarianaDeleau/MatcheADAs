@@ -48,8 +48,24 @@ const clickItem = (e) => {
 
             switchCell(selectedElement,clickedElement)
             
-            selectedElement = null;
-            clickedElement = null;
+            
+            if(hasMatch()){
+
+                searchMatches()
+                selectedElement = null;
+                clickedElement = null;
+
+            } else{
+
+                setTimeout(() => {
+                switchCell(selectedElement,clickedElement)
+                selectedElement = null;
+                clickedElement = null;
+                }, 500)
+
+            }
+
+                        
 
         } else {
             const aux=clickedElement;
@@ -70,7 +86,6 @@ const generateGrid =(matrizSize, itemSize)=> {
         for(let column=0; column<matrizSize; column++){
             
             const celda = document.createElement('div');
-
             const mq = window.matchMedia('(max-width: 500px)');
             const squareSize = () => {
                 if(mq.matches){
@@ -96,9 +111,6 @@ const generateGrid =(matrizSize, itemSize)=> {
             }
             squareSize(mq)
             
-            
-            
-            //celda.style.border = '1px solid #000';
             celda.classList.add('cell')
 
             celda.style.textAlign= 'center'
@@ -269,6 +281,7 @@ const reset= () => {
     });
 }
 
+// ######### PERMITE MOVER SOLO ADYACENTES ######
 
     let selectedItem = null;
 
@@ -294,7 +307,9 @@ const reset= () => {
 
     }
     
-    
+
+// ######### CUENTA REGRESIVA ######
+
     const callTimer = () =>{
         duration = 30;
         let timer = document.getElementById("timer");
@@ -338,7 +353,7 @@ const switchCell = (a,b) =>{
     b.setAttribute('data-y', aux1DataY)
    
     
-    searchMatches();
+   
 
 }
 
@@ -429,20 +444,24 @@ const searchHorizontalMatch = () => {
 
  const searchMatches = () => {
 
-    searchVerticalMatch();
-    searchHorizontalMatch()
-
-    setTimeout(() => {
+   
+   // setTimeout(() => {
     remove();
-    }, 3000)
+   // }, 3000)
 
-    setTimeout(() => {
+    //setTimeout(() => {
         descend()
-    }, 3000)
+    //}, 3000)
 
-    setTimeout(() => {
+   // setTimeout(() => {
         refill()
-    }, 5000)
+   // }, 5000)
+
+    //setTimeout(() => {
+ if(hasMatch()) {
+     searchMatches()
+ }
+//}, 5000)
 
 }
 
@@ -534,4 +553,15 @@ const descend = () => {
 const scoreAdd = (matchQuantity) => {
   score = score + matchQuantity * MatchPoints;
  
+}
+
+
+const hasMatch= () => {
+    
+    searchVerticalMatch();
+    searchHorizontalMatch()
+
+    
+    return document.querySelectorAll(".remove").length >0;
+
 }
