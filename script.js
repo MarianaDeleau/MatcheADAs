@@ -67,10 +67,9 @@ const clickItem = (e) => {
                         
 
         } else {
-            const aux=clickedElement;
-            clickedElement=null;
-            selectedElement=aux;
-         
+            selectedElement = clickedElement;
+            clickedElement = null;
+            
         }
 
         
@@ -90,7 +89,7 @@ const generateGrid =(matrizSize, itemSize)=> {
                 if(mq.matches){
                     celda.style.width = `${itemSize/2}px`;
                     celda.style.height = `${itemSize/2}px`;
-                    console.log(`tamanho1: ${celda.width}`)
+                   
 
                     celda.style.position = 'absolute';
                     celda.style.left = `${column*(itemSize/2)}px`;
@@ -100,7 +99,7 @@ const generateGrid =(matrizSize, itemSize)=> {
                 }else{
                     celda.style.width = `${itemSize}px`;
                     celda.style.height = `${itemSize}px`;
-                    console.log(`tamanho: ${celda.width}`)
+                    
                     celda.style.position = 'absolute';
                     celda.style.left = `${column*itemSize}px`;
                     celda.style.top = `${row*itemSize}px`;
@@ -157,43 +156,32 @@ const selectLevel = () => {
         case 'facil':
             matrizSize=9
             itemSize=56
-            generateGrid(matrizSize, itemSize);
-            hasMatch();
-            refreshStartGrid();
-            callTimer();
-            score = 0;
-            addScore.innerHTML = score;
-            
-
             break;
             
         case 'medio':
             matrizSize=8
             itemSize=63
-            generateGrid(matrizSize, itemSize);
-            hasMatch();
-            refreshStartGrid();
-            callTimer();
-            score = 0;
-            addScore.innerHTML = score;
             break;
             
         case 'dificil':
             matrizSize=7
             itemSize=72
+            break;
+
+        default:
+            swal({ icon: 'error' });
+            selectLevel();
+            return; 
+      }
+    
             generateGrid(matrizSize, itemSize);
             hasMatch();
             refreshStartGrid();
             callTimer();
             score= 0;
             addScore.innerHTML = score;
-            break;
-
-        default:
-            swal({icon:'error'});
-            selectLevel();
-      }
-            
+        
+        
     });
             
 };
@@ -201,7 +189,7 @@ const selectLevel = () => {
 //######### MENSAJE DE INICIO ######
     Swal.fire({
         title: '¡Bienvenida!',
-        html: '<p class="modal">En MatcheADAs tu objetivo es juntar tres o más ítems del mismo tipo,ya sea en fila o columna. Para eso, selecciona un ítem y a continuación un ítem adyacente para intercambiarlos de lugar.<br>Si se forma un grupo, esos ítems se eliminarán y ganarás puntos.¡Sigue armando grupos de 3 o más antes de que se acabe el tiempo!</p><br><span class="modal">CONTROLES</span><p class="modal">Click izquierdo: selección</p><p class="modal">Enter o Espacio: selección</p><p class="modal">Flechas o WASD: movimiento e intercambio</p>',
+        html: '<p class="modal">En MatcheADAs tu objetivo es juntar tres o más items del mismo tipo, ya sea en fila o columna. Para eso, selecciona un item y a continuación un item adyacente para intercambiarlos de lugar.<br>Si se forma un grupo, esos items se eliminarán y ganarás puntos. ¡Sigue armando grupos de 3 o más antes de que se acabe el tiempo!</p><br><span class="modal">CONTROLES</span><p class="modal">Click izquierdo: selección</p><p class="modal">Enter o Espacio: selección</p><p class="modal">Flechas o WASD: movimiento e intercambio</p>',
         confirmButtonText: 'JUGAR',
         padding:'1rem',
         backdrop:true,
@@ -248,8 +236,7 @@ const restarted = () => {
             clearInterval(interval);
             
         } else {
-            // window.location.reload();
-            //cancelar
+            
         }
     });
 }
@@ -325,7 +312,7 @@ const reset= () => {
 // ######### INTERCAMBIA CELDAS ######
 const switchCell = (a,b) =>{
 
-     //Almaceno en variable auxiliar el elemento clickeado
+    //Almaceno en variable auxiliar el elemento clickeado
     const auxTop= b.style.top;
     const auxLeft=b.style.left;
     
@@ -490,6 +477,7 @@ let matchCount = 0;
     
             if(item.classList.contains('remove')) {
 
+                //opción item.remove();
                 item.innerText=null;
                 item.classList.remove('remove')
                 matchCount += 1;
@@ -537,8 +525,6 @@ const descend = () => {
                        
                         if(topItem.innerText !== ""){
                             switchCell(emptyItem, topItem)
-                            // emptyItem.innerText=topItem.innerText;
-                            // topItem.innerText="";
                             break;
                         }
 

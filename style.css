@@ -1,193 +1,190 @@
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 /*font-family: 'Pacifico', cursive;*/
 /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
-*{
-margin: 0;
-padding: 0;
-box-sizing: border-box;
--webkit-transition: all 300ms ease;
--moz-transition: all 300ms ease;
--ms-transition: all 300ms ease;
--o-transition: all 300ms ease;
-transition: all 300ms ease;
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-transition: all 300ms ease;
+  -moz-transition: all 300ms ease;
+  -ms-transition: all 300ms ease;
+  -o-transition: all 300ms ease;
+  transition: all 300ms ease;
 }
 
-body{
-/* width: 100vw;
-height: 100vh; */
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-font-family: 'Pacifico', cursive;
-font-size: 16px;
-background-image: url(https://images.all-free-download.com/images/graphiclarge/agriculture_farm_drawing_farmer_hill_cock_icons_6834052.jpg);
-background-repeat: no-repeat;
-background-size: cover;
-color: #000;
-cursor: pointer;
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Pacifico", cursive;
+  font-size: 16px;
+  background-image: url(https://images.all-free-download.com/images/graphiclarge/agriculture_farm_drawing_farmer_hill_cock_icons_6834052.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #000;
+  cursor: pointer;
 }
 
-h1{
-    font-size: 3rem;
-    text-align: center;
-    color: #f87372;
-    filter: drop-shadow(2px 2px 2px #3b3636) ;
-
+h1 {
+  font-size: 3rem;
+  text-align: center;
+  color: #f87372;
+  filter: drop-shadow(2px 2px 2px #3b3636);
 }
 
-
-button{
-    width: 30px;
-    height: 30px;
-    font-size: 1rem;
-    background-color: transparent;
-    color: #FFF;
-    border-style: none;
+button {
+  width: 30px;
+  height: 30px;
+  font-size: 1rem;
+  background-color: transparent;
+  color: #fff;
+  border-style: none;
 }
 
-.cell{
+.cell {
   border-radius: 10px;
   box-sizing: border-box;
-
 }
 
-.cell:active{
-  border:1px solid  #f87372;
+.cell:active {
+  border: 1px solid #f87372;
   border-radius: 10px;
   transition-duration: 0.2s;
-  filter: drop-shadow(1px 1px 1px #f87372)
+  filter: drop-shadow(1px 1px 1px #f87372);
 }
 
-.cell:hover{
-    transform: scale(1.2);
-    transition-duration: 0.2s;
-  }
-
-.container{
-    width: 600px;
-    height: 100%;
-    padding: 20px 0;
-    margin-top: 10px;
-    background-color: transparent;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+.cell:hover {
+  transform: scale(1.2);
+  transition-duration: 0.2s;
 }
 
-.grid{
-    width: 504px;
-    height: 504px;
-    border-radius: 5px;
-    background-color:rgb(255 255 255 / 70%);
-    border: 10px ridge #f87372;
-    position: relative;
-    box-sizing: content-box;
+.container {
+  width: 600px;
+  height: 100%;
+  padding: 20px 0;
+  margin-top: 10px;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
-.control{
-    width: 524px;
-    height: 50px;
-    background-color: #f87372;
-    color: #FFF;
-    font-size: 1rem;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: row;
-    margin: 15px 0;  
-    filter: drop-shadow(2px 2px 2px #3b3636) ;  
+.grid {
+  width: 504px;
+  height: 504px;
+  border-radius: 5px;
+  background-color: rgb(255 255 255 / 70%);
+  border: 10px ridge #f87372;
+  position: relative;
+  box-sizing: content-box;
 }
 
-.points{
-    width: 70%;
-    height: 100%;
-    font-size: 1.5rem;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+.control {
+  width: 524px;
+  height: 50px;
+  background-color: #f87372;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  margin: 15px 0;
+  filter: drop-shadow(2px 2px 2px #3b3636);
 }
 
-.btn-control{
-    width: 30%;
-    height: 100%;
-    font-size: 1.5rem;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+.points {
+  width: 70%;
+  height: 100%;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
-.timer{
-    width: 120px;
-    height: 50px;
-    background-color: #f87372;
-    color: #FFF;
-    font-size: 2rem;
-    text-align: center;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: row;
-    align-items: center;
-    margin: 20px 0;
-    filter: drop-shadow(2px 2px 2px #3b3636) ;
+.btn-control {
+  width: 30%;
+  height: 100%;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
-.modal{
-    font-family: 'Poppins';
-    font-size: 1rem;
-    font-weight: bold;
-    color: #000;
+.timer {
+  width: 120px;
+  height: 50px;
+  background-color: #f87372;
+  color: #fff;
+  font-size: 2rem;
+  text-align: center;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px 0;
+  filter: drop-shadow(2px 2px 2px #3b3636);
 }
 
-.btn-play{
-    width: 100px;
-    height:40px;
-    border: 2px solid #f87372;
-    background-color: #f87372;
-    font-family: 'Poppins';
+.modal {
+  font-family: "Poppins";
+  font-size: 1rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.btn-play {
+  width: 100px;
+  height: 40px;
+  border: 2px solid #f87372;
+  background-color: #f87372;
+  font-family: "Poppins";
 }
 .icon:hover {
-    transform: rotate(-180deg);
-    transition-duration: 0.2s;
+  transform: rotate(-180deg);
+  transition-duration: 0.2s;
 }
 
-.btn-play{
-   display: flex;
-   justify-content: center;
+.btn-play {
+  display: flex;
+  justify-content: center;
 }
 
 @media screen and (max-width: 500px) {
-    body{
-        font-size: 11px;
-    }
-    h1{
-        font-size: 2rem;;
-    }
-    
-    button, .modal{
-        font-size: 0.7rem;
-    }
+  body {
+    width: 100vw;
+    height: 100vh;
+    font-size: 11px;
+  }
+  h1 {
+    font-size: 2rem;
+  }
 
-    .points{
-        font-size: 1rem;
-    }
+  button,
+  .modal {
+    font-size: 0.7rem;
+  }
 
-    .timer{
-        font-size: 1.3rem;
-    }
-    .container{
-        width: 300px;
-    }
-    .control{
-        width: 272px;
-        font-size: 0.7rem;
-    }
-    .grid {
-        width: 252px;
-        height: 252px;
-    }
+  .points {
+    font-size: 1rem;
+  }
+
+  .timer {
+    font-size: 1.3rem;
+  }
+  .container {
+    width: 300px;
+  }
+  .control {
+    width: 272px;
+    font-size: 0.7rem;
+  }
+  .grid {
+    width: 252px;
+    height: 252px;
+  }
 }
